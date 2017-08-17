@@ -9,19 +9,26 @@ import ru.kopylov.daisyplanet.utils.Conditions;
  */
 public class Planet {
     Starr star;
-    Area[] areas;
+    Zone[] zones;
 
     // Metrics
     private double albedo = 0;
     private double temperature = 0;
 
-    // parameters
+    // primary parameters
     private double radius = Conditions.getInstance().getDoubleProperty("radius");
-    private int halfFragmentation = Conditions.getInstance().getIntProperty("halfFragmentation");
-    private int daisyesPerSquareUnit = Conditions.getInstance().getIntProperty("daisyesPerSquareUnit");
-    private int numCeedPerUpdate = Conditions.getInstance().getIntProperty("numCeedPerUpdate");
+    /** количество поясов на которое разбито одно полушарие*/
+    private int halfZonation = Conditions.getInstance().getIntProperty("halfZonation");
+    /** условная площадь одной маргаритки, требуется для определения фрагментации пояса*/
+    private int daisyArea = Conditions.getInstance().getIntProperty("daisyArea");
 
+    // derivative parameters
     private double effectiveArea;
+    /**  площадь пояса у  всех area - одинаковая */
+    private double zoneArea;
+
+    /** максимальное количество маргариток, у всех одинаковое */
+    private long maxDaisiesRerZone;
 
     public Planet(Starr star){
         this.star = star;
@@ -31,7 +38,7 @@ public class Planet {
     }
 
     private void completeAreas() {
-        areas = new Area[halfFragmentation];
+        zones = new Zone[halfZonation];
 
     }
 
