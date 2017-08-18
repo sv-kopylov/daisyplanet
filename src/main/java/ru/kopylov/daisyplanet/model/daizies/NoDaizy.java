@@ -15,4 +15,12 @@ public class NoDaizy extends Daisy {
     double getAlbedo() {
         return albedo;
     }
+
+    boolean isComfortable(double temperature) {
+        return false;
+    }
+
+    boolean isFitForLife(double temperature) {
+        return false;
+    }
 }

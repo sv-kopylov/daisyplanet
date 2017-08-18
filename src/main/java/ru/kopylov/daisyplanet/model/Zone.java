@@ -25,9 +25,51 @@ public class Zone {
 
     /** температура на поверхности в данной area*/
     private double localTemperature;
-
     private long numBlackDaisies;
     private long numWhiteDaisies;
     private long numEmptyCells;
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getEffectiveArea() {
+        return effectiveArea;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getLocalTemperature() {
+        return localTemperature;
+    }
+
+    public long getNumBlackDaisies() {
+        return numBlackDaisies;
+    }
+
+    public long getNumWhiteDaisies() {
+        return numWhiteDaisies;
+    }
+
+    public long getNumEmptyCells() {
+        return numEmptyCells;
+    }
+
+    public void setLocalTemperature(double localTemperature) {
+        this.localTemperature = localTemperature;
+    }
+
+    public void setNumBlackDaisies(long numBlackDaisies) {
+        this.numBlackDaisies = numBlackDaisies;
+    }
+
+    public void setNumWhiteDaisies(long numWhiteDaisies) {
+        this.numWhiteDaisies = numWhiteDaisies;
+    }
+
+    public void setNumEmptyCells(long numEmptyCells) {
+        this.numEmptyCells = numEmptyCells;
+    }
 }

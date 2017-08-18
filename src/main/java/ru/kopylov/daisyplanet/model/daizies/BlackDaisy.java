@@ -7,13 +7,22 @@ import ru.kopylov.daisyplanet.utils.Conditions;
  */
 public class BlackDaisy extends Daisy {
 
-    double albedo = Conditions.blackDaisyAlbedo;
+    final double albedo = Conditions.blackDaisyAlbedo;
 
-    Type getType() {
+
+    public Type getType() {
         return Type.BLACK;
     }
 
-    double getAlbedo() {
+    public double getAlbedo() {
         return albedo;
+    }
+
+    boolean isComfortable(double temperature) {
+        return false;
+    }
+
+    boolean isFitForLife(double temperature) {
+        return false;
     }
 }
