@@ -4,10 +4,9 @@ package ru.kopylov.daisyplanet.model;
  * Created by sergey on 14.08.17.
  */
 public class Zone {
-
+// parameters
     /** угол границы ближайшей к экватору */
     private double latitude;
-
 
     /** эффективная площадь - проекция половины шарового слоя на плоскость,
      *  используется для расчета альбедо  */
@@ -16,27 +15,19 @@ public class Zone {
     /** высота шарового слоя*/
     private double height;
 
+    public Zone(double latitude, double effectiveArea, double height) {
+        this.latitude = latitude;
+        this.effectiveArea = effectiveArea;
+        this.height = height;
+    }
+
+    //    metrics
+
     /** температура на поверхности в данной area*/
     private double localTemperature;
 
-
-    private long mumBlackDaisies;
-    private long mumWhiteDaisies;
-    private long mumWFullCells;
-
-    public Zone(double radius, int index, int halfFragmentation){
-        latitude = ((Math.PI/2)/halfFragmentation)*index;
-
-
-        /*
-        S = 2πrh,
-
-где
-  r  – радиус сферы,
-  h  – высота сферического пояса.
-         */
-
-
-    }
+    private long numBlackDaisies;
+    private long numWhiteDaisies;
+    private long numEmptyCells;
 
 }

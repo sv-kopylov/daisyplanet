@@ -1,5 +1,4 @@
 package ru.kopylov.daisyplanet.model;
-
 import ru.kopylov.daisyplanet.utils.Conditions;
 
 
@@ -17,13 +16,19 @@ public class Planet {
 
     // primary parameters
     private double radius = Conditions.getInstance().getDoubleProperty("radius");
+
     /** количество поясов на которое разбито одно полушарие*/
     private int halfZonation = Conditions.getInstance().getIntProperty("halfZonation");
+
     /** условная площадь одной маргаритки, требуется для определения фрагментации пояса*/
     private int daisyArea = Conditions.getInstance().getIntProperty("daisyArea");
 
     // derivative parameters
+    /** эффективная площадь - проекция планеты на плоскость перпендикулярную напправлению излучения идущему
+     * от звезды к планете,
+     *  используется для расчета альбедо  */
     private double effectiveArea;
+
     /**  площадь пояса у  всех area - одинаковая */
     private double zoneArea;
 
