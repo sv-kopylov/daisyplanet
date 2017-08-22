@@ -7,9 +7,9 @@ import java.util.Properties;
  * Created by sergey on 11.08.17.
  */
 public class Conditions {
-    public static double blackDaisyAlbedo;
-    public static double whiteDaisyAlbedo;
-    public static double noDaisyAlbedo;
+    public static double blackDaisyAlbedo = 0.9;
+    public static double whiteDaisyAlbedo = 0.1;
+    public static double noDaisyAlbedo = 0.5;
     private HashMap<String, String> conditions;
 
 
