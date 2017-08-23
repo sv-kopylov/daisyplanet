@@ -72,4 +72,14 @@ public class Zone {
     public void setNumEmptyCells(long numEmptyCells) {
         this.numEmptyCells = numEmptyCells;
     }
+
+    public void incrementBlack(){
+        numBlackDaisies++;
+    }
+    public void incrementWhite(){
+        numWhiteDaisies++;
+    }
+    public void incrementEmpty(){
+        numEmptyCells++;
+    }
 }

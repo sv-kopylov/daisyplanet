@@ -20,12 +20,10 @@ public class TestZoneMaker {
     Zone[] zones;
     int halfFragmentation = 10;
     double radius = 1000;
+
     @Before
     public void init(){
-        zones = new Zone[halfFragmentation];
-        for (int i=0; i<halfFragmentation; i++){
-            zones[i] = ZoneMaker.makeZone(radius, halfFragmentation, i);
-        }
+        zones = ZoneMaker.makeZones(radius, halfFragmentation);
     }
 
 

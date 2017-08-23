@@ -7,12 +7,19 @@ import ru.kopylov.daisyplanet.model.Zone;
 public class ZoneMaker {
 
 
-    public static Zone makeZone(double radius, int halfZonation, int index){
+    private static Zone makeZone(double radius, int halfZonation, int index){
         double height = radius/halfZonation;
         double latitude = calcLatitude(radius, height, index);
         double effectiveArea = calcZoneEffeciveArea(radius, height, index);
         return new Zone(latitude, effectiveArea, height);
 
+    }
+    public static Zone[] makeZones(double radius, int halfZonation){
+        Zone[] rezult = new Zone[halfZonation];
+        for (int i=0; i<halfZonation; i++) {
+            rezult[i] = makeZone(radius, halfZonation, i);
+        }
+        return rezult;
     }
     private static double calcZoneEffeciveArea(double radius, double height, int index){
 
@@ -30,4 +37,6 @@ public class ZoneMaker {
     private static double calcLatitude(double radius, double height, int index){
         return Math.asin((height*index)/radius);
     }
+
+
 }

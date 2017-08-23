@@ -1,4 +1,6 @@
 package ru.kopylov.daisyplanet.model;
+import ru.kopylov.daisyplanet.logic.InitialDaysiePopulator;
+import ru.kopylov.daisyplanet.logic.ZoneMaker;
 import ru.kopylov.daisyplanet.utils.Conditions;
 
 
@@ -15,13 +17,13 @@ public class Planet {
     private double temperature = 0;
 
     // primary parameters
-    private double radius = Conditions.getInstance().getDoubleProperty("radius");
+    private double radius = Conditions.radius;
 
     /** количество поясов на которое разбито одно полушарие*/
-    private int halfZonation = Conditions.getInstance().getIntProperty("halfZonation");
+    private int halfZonation = Conditions.halfZonation;
 
-    /** условная площадь одной маргаритки, требуется для определения фрагментации пояса*/
-    private int daisyArea = Conditions.getInstance().getIntProperty("daisyArea");
+    /** фрагментация пояса: максимальное количество маргариток на пояс, на всех поясах - количество маргариток одинаковое */
+    private long daiziesPerZone = Conditions.daiziesPerZone;
 
     // derivative parameters
     /** эффективная площадь - проекция планеты на плоскость перпендикулярную напправлению излучения идущему
@@ -36,31 +38,24 @@ public class Planet {
      */
     private double zoneArea;
 
-    /** максимальное количество маргариток, у всех одинаковое */
-    private long maxDaisiesRerZone;
+    /** условная площадь одной маргаритки, справочный параметр*/
+    private double daisyArea;
+
 
     public Planet(Starr star){
         this.star = star;
+        zones = ZoneMaker.makeZones(radius, halfZonation);
+        InitialDaysiePopulator.populate(zones, daiziesPerZone);
         effectiveArea = Math.PI*radius*radius;
-        completeAreas();
         update();
     }
 
-    private void completeAreas() {
-        zones = new Zone[halfZonation];
-
-    }
 
     public void update() {
-        updateAlbedo();
-        updateTemperature();
+
     }
 
-    private void updateTemperature() {
-    }
 
-    private void updateAlbedo() {
-    }
 
 
 
