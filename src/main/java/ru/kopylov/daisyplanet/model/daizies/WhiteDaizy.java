@@ -8,19 +8,19 @@ import ru.kopylov.daisyplanet.utils.Conditions;
 public class WhiteDaizy extends Daisy {
 
     double albedo = Conditions.whiteDaisyAlbedo;
-    Type getType() {
+    public Type getType() {
         return Type.WHITE;
     }
 
-    double getAlbedo() {
+    public double getAlbedo() {
         return albedo;
     }
 
-    boolean isComfortable(double temperature) {
+    public boolean isComfortable(double temperature) {
         return false;
     }
 
-    boolean isFitForLife(double temperature) {
+    public boolean isFitForLife(double temperature) {
         return false;
     }
 }

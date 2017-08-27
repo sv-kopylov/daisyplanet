@@ -82,4 +82,9 @@ public class Zone {
     public void incrementEmpty(){
         numEmptyCells++;
     }
+    public void clear(){
+        numBlackDaisies=0;
+        numWhiteDaisies=0;
+        numEmptyCells=0;
+    }
 }

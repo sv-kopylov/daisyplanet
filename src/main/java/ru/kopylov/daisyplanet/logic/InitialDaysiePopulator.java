@@ -13,14 +13,21 @@ import java.util.Random;
 public class InitialDaysiePopulator {
     private static Logger logger = Logger.getLogger(InitialDaysiePopulator.class);
 
-    public static void populate (Zone[] zones, long maxDaisiesPerZone){
+    public  void populate (Zone[] zones, long maxDaisiesPerZone, int white, int black, int none){
+
+        double sum = white+black+none;
+        double whiteBorder = (double)white/sum;
+        double blackBorder = 1.0 - (double)black/sum;
+
+
         Random random = new Random(GregorianCalendar.getInstance().getTimeInMillis());
         for (int i=0; i<zones.length; i++){
+            zones[i].clear();
             for (long j=0; j<maxDaisiesPerZone; j++){
-                int num = random.nextInt(1000);
-                if (num<332){
+                double num = random.nextDouble();
+                if (num<whiteBorder){
                     zones[i].incrementWhite();
-                } else if (num>667) {
+                } else if (num>blackBorder) {
                     zones[i].incrementBlack();
                 } else {
                     zones[i].incrementEmpty();

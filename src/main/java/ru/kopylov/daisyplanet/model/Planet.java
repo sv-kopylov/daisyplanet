@@ -38,6 +38,7 @@ public class Planet {
      */
     private double zoneArea;
 
+
     /** условная площадь одной маргаритки, справочный параметр*/
     private double daisyArea;
 
@@ -45,10 +46,15 @@ public class Planet {
     public Planet(Starr star){
         this.star = star;
         zones = ZoneMaker.makeZones(radius, halfZonation);
-        InitialDaysiePopulator.populate(zones, daiziesPerZone);
+        InitialDaysiePopulator idp = new InitialDaysiePopulator();
+        idp.populate(zones, daiziesPerZone, 10, 10, 10);
         effectiveArea = Math.PI*radius*radius;
+        zoneArea = 2*Math.PI*radius*(radius/halfZonation);
+        daisyArea = zoneArea/daiziesPerZone;
         update();
     }
+
+
 
 
     public void update() {

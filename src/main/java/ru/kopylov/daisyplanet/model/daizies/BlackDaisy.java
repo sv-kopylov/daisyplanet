@@ -18,11 +18,11 @@ public class BlackDaisy extends Daisy {
         return albedo;
     }
 
-    boolean isComfortable(double temperature) {
+    public boolean isComfortable(double temperature) {
         return false;
     }
 
-    boolean isFitForLife(double temperature) {
+    public boolean isFitForLife(double temperature) {
         return false;
     }
 }
