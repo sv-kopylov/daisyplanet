@@ -1,4 +1,6 @@
 package ru.kopylov.daisyplanet.model;
+import ru.kopylov.daisyplanet.logic.AlbedoCalculator;
+import ru.kopylov.daisyplanet.logic.AlbedoCalculatorImpl;
 import ru.kopylov.daisyplanet.logic.InitialDaysiePopulator;
 import ru.kopylov.daisyplanet.logic.ZoneMaker;
 import ru.kopylov.daisyplanet.utils.Conditions;
@@ -56,8 +58,13 @@ public class Planet {
 
 
 
-
+    AlbedoCalculator albedoCalculator = new AlbedoCalculatorImpl();
     public void update() {
+        albedo = albedoCalculator.calcAlbedo(zones);
+//        расчет температуры по формуле Стефана - Больцмана
+        double up = (1-albedo)*star.getStarConstant();
+        double down = 4.0*Conditions.StephanBoltsmanConst;
+        temperature = Math.pow(up/down, 0.25);
 
     }
 

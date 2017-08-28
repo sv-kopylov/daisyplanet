@@ -10,12 +10,14 @@ public class Conditions {
     public static long daiziesPerZone = 100;
 
     // Daizies constants
-    public static double blackDaisyAlbedo = 0.9;
-    public static double whiteDaisyAlbedo = 0.1;
+    public static double blackDaisyAlbedo = 0.1;
+    public static double whiteDaisyAlbedo = 0.9;
     public static double noDaisyAlbedo = 0.5;
 
     // Starr constants
     public static double StarConstant = 1367.0;
+    public static double StephanBoltsmanConst = 5.67e-8;
+
 
     private Conditions(){
      }

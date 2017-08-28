@@ -22,7 +22,6 @@ public class TestInitialPopulation {
     public void init(){
         zones = ZoneMaker.makeZones(radius, halfFragmentation);
 
-        new InitialDaysiePopulator().populate(zones, daiziesPerZone, 10, 10, 10);
     }
 
     @Test
