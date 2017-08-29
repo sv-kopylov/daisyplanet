@@ -1,5 +1,7 @@
 package ru.kopylov.daisyplanet.model;
 
+import ru.kopylov.daisyplanet.utils.Conditions;
+
 /**
  * Created by sergey on 14.08.17.
  */
@@ -57,8 +59,8 @@ public class Zone {
         return numEmptyCells;
     }
 
-    public void setLocalTemperature(double localTemperature) {
-        this.localTemperature = localTemperature;
+    public void setLocalTemperature(double globalTemperature) {
+        this.localTemperature = globalTemperature + Conditions.planetDeltaTemper*Math.cos(latitude);
     }
 
     public void setNumBlackDaisies(long numBlackDaisies) {

@@ -2,7 +2,6 @@ package ru.kopylov.daisyplanet.tests;
 
 import org.apache.log4j.Logger;
 import org.junit.*;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import ru.kopylov.daisyplanet.logic.ZoneMaker;
 import ru.kopylov.daisyplanet.model.Zone;

@@ -65,7 +65,14 @@ public class Planet {
         double up = (1-albedo)*star.getStarConstant();
         double down = 4.0*Conditions.StephanBoltsmanConst;
         temperature = Math.pow(up/down, 0.25);
+        updateLocalTempers();
 
+    }
+
+    private void updateLocalTempers(){
+        for(Zone zone:zones){
+            zone.setLocalTemperature(temperature);
+        }
     }
 
     public double getAlbedo() {

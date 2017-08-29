@@ -10,7 +10,7 @@ import java.util.Random;
 /**
  * Created by sergey on 22.08.17.
  */
-public class InitialDaysiePopulator {
+public class InitialDaysiePopulator implements DaizyPopulator{
     private static Logger logger = Logger.getLogger(InitialDaysiePopulator.class);
 
     public  void populate (Zone[] zones, long maxDaisiesPerZone, int white, int black, int none){
