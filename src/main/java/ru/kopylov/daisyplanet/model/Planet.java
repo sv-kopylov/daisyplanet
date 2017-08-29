@@ -68,9 +68,11 @@ public class Planet {
 
     }
 
+    public double getAlbedo() {
+        return albedo;
+    }
 
-
-
-
-
+    public double getTemperature() {
+        return temperature;
+    }
 }

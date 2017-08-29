@@ -9,14 +9,23 @@ public class Conditions {
     public static int halfZonation = 90;
     public static long daiziesPerZone = 100;
 
+//    public static double deltaTemperature = ;
+
+
+//    public static long
+
     // Daizies constants
     public static double blackDaisyAlbedo = 0.1;
     public static double whiteDaisyAlbedo = 0.9;
     public static double noDaisyAlbedo = 0.5;
 
     // Starr constants
+
     public static double StarConstant = 1367.0;
     public static double StephanBoltsmanConst = 5.67e-8;
+
+    public static double Kelvin = -273.15;
+
 
 
     private Conditions(){
