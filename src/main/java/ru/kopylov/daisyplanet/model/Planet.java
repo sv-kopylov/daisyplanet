@@ -5,14 +5,15 @@ import ru.kopylov.daisyplanet.logic.InitialDaysiePopulator;
 import ru.kopylov.daisyplanet.logic.ZoneMaker;
 import ru.kopylov.daisyplanet.utils.Conditions;
 
+import java.util.Arrays;
 
 
 /**
  * Created by sergey on 10.08.17.
  */
 public class Planet {
-    Starr star;
-    Zone[] zones;
+    private Starr star;
+    private Zone[] zones;
 
     // Metrics
     private double albedo = 0;
@@ -70,9 +71,7 @@ public class Planet {
     }
 
     private void updateLocalTempers(){
-        for(Zone zone:zones){
-            zone.setLocalTemperature(temperature);
-        }
+        Arrays.stream(zones).forEach(zone->zone.setLocalTemperature(temperature));
     }
 
     public double getAlbedo() {
@@ -81,5 +80,9 @@ public class Planet {
 
     public double getTemperature() {
         return temperature;
+    }
+
+    public Zone[] getZones(){
+        return zones;
     }
 }
