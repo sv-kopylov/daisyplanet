@@ -23,13 +23,19 @@ public class Zone {
         this.height = height;
     }
 
-    //    metrics
+//    metrics
 
     /** температура на поверхности в данной area*/
     private double localTemperature;
+
+//    количество маргариток
     private long numBlackDaisies;
     private long numWhiteDaisies;
     private long numEmptyCells;
+
+    public boolean isAlive(){
+        return (numBlackDaisies!=0)||(numWhiteDaisies!=0);
+    }
 
     public double getLatitude() {
         return latitude;

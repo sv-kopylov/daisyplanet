@@ -5,9 +5,17 @@ import ru.kopylov.daisyplanet.model.Zone;
 /**
  * Created by sergey on 22.08.17.
  */
-public class DaizyRePopulator implements DaizyPopulator {
+public class DaizyRePopulator {
+    Populator daizyPopulator = new PopulatorImpl();
+    double temperature;
 
-       public void populate(Zone[] zones, long maxDaisiesPerZone, int white, int black, int none) {
+
+       public void rePopulate(Zone[] zones) {
+           for(Zone zone: zones){
+
+
+               zone.getLocalTemperature();
+           }
 
     }
 }

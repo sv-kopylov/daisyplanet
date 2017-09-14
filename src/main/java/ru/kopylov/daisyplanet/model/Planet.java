@@ -1,7 +1,7 @@
 package ru.kopylov.daisyplanet.model;
 import ru.kopylov.daisyplanet.logic.AlbedoCalculator;
 import ru.kopylov.daisyplanet.logic.AlbedoCalculatorImpl;
-import ru.kopylov.daisyplanet.logic.InitialDaysiePopulator;
+import ru.kopylov.daisyplanet.logic.PopulatorImpl;
 import ru.kopylov.daisyplanet.logic.ZoneMaker;
 import ru.kopylov.daisyplanet.utils.Conditions;
 
@@ -14,6 +14,7 @@ import java.util.Arrays;
 public class Planet {
     private Starr star;
     private Zone[] zones;
+    private boolean inhabited;
 
     // Metrics
     private double albedo = 0;
@@ -48,9 +49,10 @@ public class Planet {
 
     public Planet(Starr star){
         this.star = star;
+        inhabited = true;
         zones = ZoneMaker.makeZones(radius, halfZonation);
-        InitialDaysiePopulator idp = new InitialDaysiePopulator();
-        idp.populate(zones, daiziesPerZone, 10, 10, 10);
+        PopulatorImpl idp = new PopulatorImpl();
+        idp.populateInitial(zones, 10, 10, 10);
         effectiveArea = Math.PI*radius*radius;
         zoneArea = 2*Math.PI*radius*(radius/halfZonation);
         daisyArea = zoneArea/daiziesPerZone;
