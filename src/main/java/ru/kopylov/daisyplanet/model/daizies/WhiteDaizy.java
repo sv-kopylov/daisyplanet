@@ -16,11 +16,14 @@ public class WhiteDaizy extends Daisy {
         return albedo;
     }
 
-    public boolean isComfortable(double temperature) {
-        return false;
+    public static boolean isComfortable(double temperature) {
+
+        return (Math.abs(temperature - Conditions.whiteComfortableTemper)
+                <= Conditions.comfortHalfGap);
     }
 
-    public boolean isFitForLife(double temperature) {
-        return false;
+    public static boolean isFitForLife(double temperature) {
+        return (Math.abs(temperature - Conditions.whiteComfortableTemper)
+                <= Conditions.aliveHalfGap);
     }
 }

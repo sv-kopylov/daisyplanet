@@ -7,7 +7,5 @@ import ru.kopylov.daisyplanet.utils.Conditions;
 abstract public class Daisy {
    public abstract Type getType();
    public abstract double getAlbedo();
-   public abstract boolean isComfortable(double temperature);
-   public abstract boolean isFitForLife(double temperature);
 
 }
