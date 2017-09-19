@@ -33,7 +33,6 @@ public class ZoneMaker {
 
         return 2*(sRectangle+sTriangle+sSegment);
     }
-
     private static double calcLatitude(double radius, double height, int index){
         return Math.asin((height*index)/radius);
     }

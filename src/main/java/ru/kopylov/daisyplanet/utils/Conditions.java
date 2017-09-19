@@ -28,6 +28,7 @@ public class Conditions {
     public static double noDaisyAlbedo = 0.5;
 
     /**
+     * пример:
      *  black white
      +43 ---- ----
      +42 ---- --++
@@ -84,8 +85,8 @@ public class Conditions {
 //      (не может быть больше aliveHalfGap)
     public static double comfortHalfGap = 3.0;
 //    значение комфортной температуры для жизни маргариток
-    public static double blackComfortableTemper = 18 + Kelvin;
-    public static double whiteComfortableTemper = 22 + Kelvin;
+    public static double blackComfortableTemper = 18 + (-Kelvin);
+    public static double whiteComfortableTemper = 22 + (-Kelvin);
 
 
 

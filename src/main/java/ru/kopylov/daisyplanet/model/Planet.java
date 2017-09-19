@@ -1,8 +1,5 @@
 package ru.kopylov.daisyplanet.model;
-import ru.kopylov.daisyplanet.logic.AlbedoCalculator;
-import ru.kopylov.daisyplanet.logic.AlbedoCalculatorImpl;
-import ru.kopylov.daisyplanet.logic.PopulatorImpl;
-import ru.kopylov.daisyplanet.logic.ZoneMaker;
+import ru.kopylov.daisyplanet.logic.*;
 import ru.kopylov.daisyplanet.utils.Conditions;
 
 import java.util.Arrays;
@@ -46,13 +43,14 @@ public class Planet {
     /** условная площадь одной маргаритки, справочный параметр*/
     private double daisyArea;
 
+    PopulatorImpl populator = new PopulatorImpl();
+    AlbedoCalculator albedoCalculator = new AlbedoCalculatorImpl();
 
     public Planet(Starr star){
         this.star = star;
         inhabited = true;
         zones = ZoneMaker.makeZones(radius, halfZonation);
-        PopulatorImpl idp = new PopulatorImpl();
-        idp.populateInitial(zones, 10, 10, 10);
+        populator.populateInitial(zones, 10, 10, 10);
         effectiveArea = Math.PI*radius*radius;
         zoneArea = 2*Math.PI*radius*(radius/halfZonation);
         daisyArea = zoneArea/daiziesPerZone;
@@ -60,15 +58,11 @@ public class Planet {
     }
 
 
-
-    AlbedoCalculator albedoCalculator = new AlbedoCalculatorImpl();
     public void update() {
         albedo = albedoCalculator.calcAlbedo(zones);
-//        расчет температуры по формуле Стефана - Больцмана
-        double up = (1-albedo)*star.getStarConstant();
-        double down = 4.0*Conditions.StephanBoltsmanConst;
-        temperature = Math.pow(up/down, 0.25);
+        temperature = StephanBoltsman.countTemperature(albedo,star.getStarConstant());
         updateLocalTempers();
+        populator.rePopulate(this);
 
     }
 
@@ -86,5 +80,13 @@ public class Planet {
 
     public Zone[] getZones(){
         return zones;
+    }
+
+    public boolean isInhabited() {
+        return inhabited;
+    }
+
+    public void setInhabited(boolean inhabited) {
+        this.inhabited = inhabited;
     }
 }

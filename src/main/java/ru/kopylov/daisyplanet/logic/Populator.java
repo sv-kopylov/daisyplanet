@@ -1,5 +1,6 @@
 package ru.kopylov.daisyplanet.logic;
 
+import ru.kopylov.daisyplanet.model.Planet;
 import ru.kopylov.daisyplanet.model.Zone;
 
 /**
@@ -8,6 +9,7 @@ import ru.kopylov.daisyplanet.model.Zone;
 public interface Populator {
        void populateInitial(Zone[] zones, int whiteExpectance, int black, int none);
        void populate(Zone zone,  int white, int black, int none);
+       public void rePopulate(Planet planet);
 
 
 
