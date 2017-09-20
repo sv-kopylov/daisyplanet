@@ -29,8 +29,13 @@ public class TestPlanet {
     public void testUpdate(){
         Starr Sun = new Starr();
         Planet Mars = new Planet(Sun);
+        System.out.print("a: "+String.format("%2.2f",Mars.getAlbedo()));
+        System.out.println(" t: "+String.format("%2.2f",(Mars.getTemperature() + Conditions.Kelvin + Conditions.planetDeltaTemper)));
+        System.out.println("_____________");
         for(int i =0; i<100; i++){
             Mars.update();
+            System.out.print("a: "+String.format("%2.2f",Mars.getAlbedo()));
+            System.out.println(" t: "+String.format("%2.2f",(Mars.getTemperature() + Conditions.Kelvin + Conditions.planetDeltaTemper)));
         }
     }
 

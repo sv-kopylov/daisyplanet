@@ -55,10 +55,10 @@ public class PopulatorImpl implements Populator {
             down = i;
             if(i<=zones.length-3){up = i + 2;}
             cnt+=zones[i].isAlive()?1:0;
-            logger.debug("zone["+i+"]: "+ zoneToStr(zones[i]));
+            logger.trace("zone["+i+"]: "+ zoneToStr(zones[i]));
 
         }
-        logger.debug("Alive counter: "+cnt);
+        logger.trace("Alive counter: "+cnt);
         if(cnt==0) {
             planet.setInhabited(false);
             logger.warn("PLANET IS DEAD");
