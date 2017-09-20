@@ -50,11 +50,12 @@ public class PopulatorImpl implements Populator {
         int up = 1;
         int cnt=0;
         for (int i=0; i<zones.length; i++){
-            logger.debug("before: "+down+"-"+i+"-"+up);
+            logger.trace("before: "+down+"-"+i+"-"+up);
             rePopulate(zones[i], zones[down], zones[up]);
             down = i;
             if(i<=zones.length-3){up = i + 2;}
             cnt+=zones[i].isAlive()?1:0;
+            logger.debug("zone["+i+"]: "+ zoneToStr(zones[i]));
 
         }
         logger.debug("Alive counter: "+cnt);
@@ -91,6 +92,21 @@ public class PopulatorImpl implements Populator {
 
         populate  (zone, white, black, none);
 
+    }
+
+    public String zoneToStr(Zone zone){
+        StringBuilder sb = new StringBuilder();
+        sb.append("temper: ");
+        sb.append(String.format("%2.1f", zone.getLocalTemperature()+Conditions.Kelvin));
+        sb.append(zone.isAlive()?" alive ":" dead ");
+        sb.append(" white: ");
+        sb.append(zone.getNumWhiteDaisies());
+        sb.append(" black: ");
+        sb.append(zone.getNumBlackDaisies());
+        sb.append(" empty: ");
+        sb.append(zone.getNumEmptyCells());
+
+        return sb.toString();
     }
 
 

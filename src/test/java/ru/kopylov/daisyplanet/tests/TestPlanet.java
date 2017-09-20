@@ -25,6 +25,15 @@ public class TestPlanet {
         System.out.println(Mars.getTemperature() + Conditions.Kelvin + Conditions.planetDeltaTemper);
     }
 
+    @Test
+    public void testUpdate(){
+        Starr Sun = new Starr();
+        Planet Mars = new Planet(Sun);
+        for(int i =0; i<100; i++){
+            Mars.update();
+        }
+    }
+
 //    TODO make test of local temperatures
     @Test
     public void testLocalTemperatures(){
@@ -38,6 +47,9 @@ public class TestPlanet {
                     assertTrue("local temperat have not been set", (temperature>0));
                 return;});
     }
+
+
+
 
 
 }
