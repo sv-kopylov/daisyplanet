@@ -18,13 +18,13 @@ public class Planet {
     private double temperature = 0;
 
     // primary parameters
-    private double radius = Conditions.radius;
+    private double radius = Conditions.getInstance().radius;
 
     /** количество поясов на которое разбито одно полушарие*/
-    private int halfZonation = Conditions.halfZonation;
+    private int halfZonation = Conditions.getInstance().halfZonation;
 
     /** фрагментация пояса: максимальное количество маргариток на пояс, на всех поясах - количество маргариток одинаковое */
-    private long daiziesPerZone = Conditions.daiziesPerZone;
+    private long daiziesPerZone = Conditions.getInstance().daiziesPerZone;
 
     // derivative parameters
     /** эффективная площадь - проекция планеты на плоскость перпендикулярную напправлению излучения идущему

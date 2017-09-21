@@ -30,7 +30,7 @@ public class PopulatorImpl implements Populator {
         double blackBorder = 1.0 - (double)black/sum;
         zone.clear();
 
-        for (long j=0; j< Conditions.daiziesPerZone; j++){
+        for (long j=0; j< Conditions.getInstance().daiziesPerZone; j++){
             double num = random.nextDouble();
             if (num<whiteBorder){
                 zone.incrementWhite();
@@ -97,7 +97,7 @@ public class PopulatorImpl implements Populator {
     public String zoneToStr(Zone zone){
         StringBuilder sb = new StringBuilder();
         sb.append("temper: ");
-        sb.append(String.format("%2.1f", zone.getLocalTemperature()+Conditions.Kelvin));
+        sb.append(String.format("%2.1f", zone.getLocalTemperature()+Conditions.getInstance().Kelvin));
         sb.append(zone.isAlive()?" alive ":" dead ");
         sb.append(" white: ");
         sb.append(zone.getNumWhiteDaisies());

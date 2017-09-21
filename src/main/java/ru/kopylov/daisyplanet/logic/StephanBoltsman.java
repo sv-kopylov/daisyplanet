@@ -20,7 +20,7 @@ public class StephanBoltsman {
      */
     public static double countTemperature(double albedo, double starConstant){
         double numerator = (1-albedo)*starConstant;
-        double denomenator = 4.0* Conditions.StephanBoltsmanConst;
+        double denomenator = 4.0* Conditions.getInstance().StephanBoltsmanConst;
         return Math.pow(numerator/denomenator, 0.25);
     }
 }

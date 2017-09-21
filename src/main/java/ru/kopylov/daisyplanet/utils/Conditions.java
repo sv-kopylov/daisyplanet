@@ -6,26 +6,26 @@ package ru.kopylov.daisyplanet.utils;
 public class Conditions {
 
 
-    public static double Kelvin = -273.15;
+    public double Kelvin = -273.15;
 // Planet constants
-    public static double radius = 1000.0;
-    public static int halfZonation = 90;
-    public static long daiziesPerZone = 100;
+    public double radius = 1000.0;
+    public int halfZonation = 90;
+    public long daiziesPerZone = 100;
 
 //    эмпирическая отсебятина: разница температур на экваторе и на полюсах, если вычислять в зависимости от широты
 //    то на полисе окажется нулевая по кльвину, что противоречит здравому смыслу
 //    величина должна зависеть от теплопроводности планеты, миграции тепла по атмосфере, и т.п.
 //    к тому же температура на повехности должна быть выше расчетной из за того, что поверхность первой прогревается,
 //    и из за парникового эффекта, если, конечно, есть подходящая атмосфера
-    public static double planetDeltaTemper = 70.0;
+    public double planetDeltaTemper = 70.0;
 
 
 //    public static long
 
     // Daizies constants
-    public static double blackDaisyAlbedo = 0.1;
-    public static double whiteDaisyAlbedo = 0.9;
-    public static double noDaisyAlbedo = 0.5;
+    public double blackDaisyAlbedo = 0.1;
+    public double whiteDaisyAlbedo = 0.9;
+    public double noDaisyAlbedo = 0.5;
 
     /**
      * пример:
@@ -80,21 +80,18 @@ public class Conditions {
      */
 
 //    половина темпеатурного интервала, при котором маргаритки могут жить
-    public static double aliveHalfGap = 20.0;
+    public double aliveHalfGap = 20.0;
 //    половина темпеатурного интервала, при котором маргаритки максимально продуктивны
 //      (не может быть больше aliveHalfGap)
-    public static double comfortHalfGap = 3.0;
+    public double comfortHalfGap = 3.0;
 //    значение комфортной температуры для жизни маргариток
-    public static double blackComfortableTemper = 18 + (-Kelvin);
-    public static double whiteComfortableTemper = 22 + (-Kelvin);
-
-
-
+    public double blackComfortableTemper = 18 + (-Kelvin);
+    public double whiteComfortableTemper = 22 + (-Kelvin);
 
     // Starr constants
 
-    public static double StarConstant = 1367.0;
-    public static double StephanBoltsmanConst = 5.67e-8;
+    public double StarConstant = 1367.0;
+    public double StephanBoltsmanConst = 5.67e-8;
 
 
 

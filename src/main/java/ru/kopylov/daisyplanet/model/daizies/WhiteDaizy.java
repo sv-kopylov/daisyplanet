@@ -7,7 +7,7 @@ import ru.kopylov.daisyplanet.utils.Conditions;
  */
 public class WhiteDaizy extends Daisy {
 
-    double albedo = Conditions.whiteDaisyAlbedo;
+    double albedo = Conditions.getInstance().whiteDaisyAlbedo;
     public Type getType() {
         return Type.WHITE;
     }
@@ -18,12 +18,12 @@ public class WhiteDaizy extends Daisy {
 
     public static boolean isComfortable(double temperature) {
 
-        return (Math.abs(temperature - Conditions.whiteComfortableTemper)
-                <= Conditions.comfortHalfGap);
+        return (Math.abs(temperature - Conditions.getInstance().whiteComfortableTemper)
+                <= Conditions.getInstance().comfortHalfGap);
     }
 
     public static boolean isFitForLife(double temperature) {
-        return (Math.abs(temperature - Conditions.whiteComfortableTemper)
-                <= Conditions.aliveHalfGap);
+        return (Math.abs(temperature - Conditions.getInstance().whiteComfortableTemper)
+                <= Conditions.getInstance().aliveHalfGap);
     }
 }

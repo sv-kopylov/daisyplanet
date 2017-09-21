@@ -66,7 +66,7 @@ public class Zone {
     }
 
     public void setLocalTemperature(double globalTemperature) {
-        this.localTemperature = globalTemperature + Conditions.planetDeltaTemper*Math.cos(latitude);
+        this.localTemperature = globalTemperature + Conditions.getInstance().planetDeltaTemper*Math.cos(latitude);
     }
 
     public void setNumBlackDaisies(long numBlackDaisies) {
