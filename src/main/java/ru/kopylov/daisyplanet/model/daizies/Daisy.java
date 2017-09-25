@@ -1,5 +1,4 @@
 package ru.kopylov.daisyplanet.model.daizies;
-import ru.kopylov.daisyplanet.utils.Conditions;
 
 /**
  * Created by sergey on 17.08.17.

@@ -1,6 +1,5 @@
 package ru.kopylov.daisyplanet.model;
 import ru.kopylov.daisyplanet.logic.*;
-import ru.kopylov.daisyplanet.utils.Conditions;
 
 import java.util.Arrays;
 
@@ -8,6 +7,7 @@ import java.util.Arrays;
 /**
  * Created by sergey on 10.08.17.
  */
+
 public class Planet {
     private Starr star;
     private Zone[] zones;
@@ -46,10 +46,10 @@ public class Planet {
     PopulatorImpl populator = new PopulatorImpl();
     AlbedoCalculator albedoCalculator = new AlbedoCalculatorImpl();
 
-    public Planet(Starr star){
-        this.star = star;
-        inhabited = true;
+    public Planet(){
+        this.star = new Starr();
         zones = ZoneMaker.makeZones(radius, halfZonation);
+        inhabited = true;
         populator.populateInitial(zones, 10, 10, 10);
         effectiveArea = Math.PI*radius*radius;
         zoneArea = 2*Math.PI*radius*(radius/halfZonation);

@@ -1,6 +1,6 @@
 package ru.kopylov.daisyplanet.logic;
 
-import ru.kopylov.daisyplanet.utils.Conditions;
+import ru.kopylov.daisyplanet.model.Conditions;
 
 /**
  * Created by sergey on 18.09.17.

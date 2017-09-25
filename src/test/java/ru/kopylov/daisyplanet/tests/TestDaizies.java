@@ -2,9 +2,8 @@ package ru.kopylov.daisyplanet.tests;
 
 import org.junit.Test;
 import ru.kopylov.daisyplanet.model.daizies.BlackDaisy;
-import ru.kopylov.daisyplanet.model.daizies.Daisy;
 import ru.kopylov.daisyplanet.model.daizies.WhiteDaizy;
-import ru.kopylov.daisyplanet.utils.Conditions;
+import ru.kopylov.daisyplanet.model.Conditions;
 
 import static org.junit.Assert.assertTrue;
 
@@ -21,12 +20,12 @@ public class TestDaizies {
             System.out.printf("%+3.0f ",(float)i);
 //            System.out.print("black:\t");
 
-            if(BlackDaisy.isComfortable(Conditions.Kelvin+i))
+            if(BlackDaisy.isComfortable(Conditions.getInstance().Kelvin+i))
                 System.out.print("++");
             else
                 System.out.print("--");
 
-            if(BlackDaisy.isFitForLife(Conditions.Kelvin+i))
+            if(BlackDaisy.isFitForLife(Conditions.getInstance().Kelvin+i))
                 System.out.print("++ ");
             else
                 System.out.print("-- ");
@@ -34,12 +33,12 @@ public class TestDaizies {
 
 //            System.out.print("white:\t");
 
-            if(WhiteDaizy.isComfortable(Conditions.Kelvin+i))
+            if(WhiteDaizy.isComfortable(Conditions.getInstance().Kelvin+i))
                 System.out.print("++");
             else
                 System.out.print("--");
 
-            if(WhiteDaizy.isFitForLife(Conditions.Kelvin+i))
+            if(WhiteDaizy.isFitForLife(Conditions.getInstance().Kelvin+i))
                 System.out.println("++");
             else
                 System.out.println("--");

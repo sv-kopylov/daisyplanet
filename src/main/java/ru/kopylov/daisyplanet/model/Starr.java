@@ -1,7 +1,5 @@
 package ru.kopylov.daisyplanet.model;
 
-import ru.kopylov.daisyplanet.utils.Conditions;
-
 /**
  * Created by sergey on 10.08.17.
  */

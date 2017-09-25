@@ -1,4 +1,4 @@
-package ru.kopylov.daisyplanet.utils;
+package ru.kopylov.daisyplanet.model;
 
 /**
  * Created by sergey on 11.08.17.

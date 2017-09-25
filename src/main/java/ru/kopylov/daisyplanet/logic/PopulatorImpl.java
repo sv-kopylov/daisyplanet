@@ -5,7 +5,7 @@ import ru.kopylov.daisyplanet.model.Planet;
 import ru.kopylov.daisyplanet.model.Zone;
 import ru.kopylov.daisyplanet.model.daizies.BlackDaisy;
 import ru.kopylov.daisyplanet.model.daizies.WhiteDaizy;
-import ru.kopylov.daisyplanet.utils.Conditions;
+import ru.kopylov.daisyplanet.model.Conditions;
 
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -55,7 +55,7 @@ public class PopulatorImpl implements Populator {
             down = i;
             if(i<=zones.length-3){up = i + 2;}
             cnt+=zones[i].isAlive()?1:0;
-            logger.trace("zone["+i+"]: "+ zoneToStr(zones[i]));
+            logger.trace("zone["+i+"]: "+ zones[i].toString());
 
         }
         logger.trace("Alive counter: "+cnt);
@@ -94,20 +94,7 @@ public class PopulatorImpl implements Populator {
 
     }
 
-    public String zoneToStr(Zone zone){
-        StringBuilder sb = new StringBuilder();
-        sb.append("temper: ");
-        sb.append(String.format("%2.1f", zone.getLocalTemperature()+Conditions.getInstance().Kelvin));
-        sb.append(zone.isAlive()?" alive ":" dead ");
-        sb.append(" white: ");
-        sb.append(zone.getNumWhiteDaisies());
-        sb.append(" black: ");
-        sb.append(zone.getNumBlackDaisies());
-        sb.append(" empty: ");
-        sb.append(zone.getNumEmptyCells());
 
-        return sb.toString();
-    }
 
 
 

@@ -1,7 +1,5 @@
 package ru.kopylov.daisyplanet.model;
 
-import ru.kopylov.daisyplanet.utils.Conditions;
-
 /**
  * Created by sergey on 14.08.17.
  */
@@ -94,5 +92,19 @@ public class Zone {
         numBlackDaisies=0;
         numWhiteDaisies=0;
         numEmptyCells=0;
+    }
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("temper: ");
+        sb.append(String.format("%2.1f", getLocalTemperature()+Conditions.getInstance().Kelvin));
+        sb.append(isAlive()?" alive ":" dead ");
+        sb.append(" white: ");
+        sb.append(getNumWhiteDaisies());
+        sb.append(" black: ");
+        sb.append(getNumBlackDaisies());
+        sb.append(" empty: ");
+        sb.append(getNumEmptyCells());
+
+        return sb.toString();
     }
 }
