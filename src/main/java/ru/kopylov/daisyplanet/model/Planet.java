@@ -9,9 +9,13 @@ import java.util.Arrays;
  */
 
 public class Planet {
+
+    private Long iterationId;
     private Starr star;
     private Zone[] zones;
     private boolean inhabited;
+
+
 
     // Metrics
     private double albedo = 0;
@@ -54,6 +58,7 @@ public class Planet {
         effectiveArea = Math.PI*radius*radius;
         zoneArea = 2*Math.PI*radius*(radius/halfZonation);
         daisyArea = zoneArea/daiziesPerZone;
+        iterationId =0l;
         update();
     }
 
@@ -63,6 +68,7 @@ public class Planet {
         temperature = StephanBoltsman.countTemperature(albedo,star.getStarConstant());
         updateLocalTempers();
         populator.rePopulate(this);
+        iterationId++;
 
     }
 

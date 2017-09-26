@@ -32,6 +32,8 @@ public class TestInitialPopulation {
         }
 
     }
+
+
     @Test
     public void testWhitePopulation(){
         idp.populateInitial(zones, 10, 0, 0);

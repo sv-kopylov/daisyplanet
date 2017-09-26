@@ -93,9 +93,6 @@ public class Conditions {
     public double StarConstant = 1367.0;
     public double StephanBoltsmanConst = 5.67e-8;
 
-
-
-
     private Conditions(){
      }
     private static Conditions unicInstance;
