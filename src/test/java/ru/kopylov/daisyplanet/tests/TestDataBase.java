@@ -11,8 +11,8 @@ import ru.kopylov.daisyplanet.dao.PlanetDAO;
 public class TestDataBase {
 
     @Test
-    public void testDaisiesAmmount(){
-        new PlanetDAO().test();
+    public void testCreateDB(){
+        new PlanetDAO();
 
     }
 }
