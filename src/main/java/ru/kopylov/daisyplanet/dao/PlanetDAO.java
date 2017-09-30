@@ -131,6 +131,16 @@ public class PlanetDAO {
             }
             return null;
         }
+    public void close(){
+        if(conn!=null){
+            try{
+                conn.close();
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+
+    }
 
     public void persist(Planet planet){
 
@@ -216,28 +226,6 @@ public class PlanetDAO {
 
 
     }
-    private void persist(Zone zone, long iteration, int zoneId){
-        String sql = "INSERT INTO Zone ( id ,iterationId, latitude, effectiveArea, height, " +
-                "localTemperature, numBlackDaisies, numWhiteDaisies, numEmptyCells) " +
-                "VALUES (?,?,?,?,?,?,?,?,?)" +
-                "";
-        Connection conn = getConnection();
-        try ( PreparedStatement sttm = conn.prepareStatement(sql)){
-            sttm.setLong(1, zoneId);
-            sttm.setLong(2, iteration);
-            sttm.setDouble(3, zone.getLatitude());
-            sttm.setDouble(4, zone.getEffectiveArea());
-            sttm.setDouble(5, zone.getHeight());
-            sttm.setDouble(6, zone.getLocalTemperature());
-            sttm.setDouble(7, zone.getNumBlackDaisies());
-            sttm.setDouble(8, zone.getNumWhiteDaisies());
-            sttm.setDouble(9, zone.getNumEmptyCells());
-            sttm.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public Planet getPlanet(Long iteration){
         return null;
@@ -245,18 +233,78 @@ public class PlanetDAO {
     public Planet[] getPlanets(Long iterationFrom, Long iterationtO){
          return null;
     }
-
-
-
     private Zone[] getZones(Long iteration){
+        String howManySql = "SELECT count(*) FROM Zone WHERE  iterationId = "+Long.toString(iteration);
+
+        String sql = "SELECT id, latitude, effectiveArea, height, localTemperature," +
+                     "numBlackDaisies, numWhiteDaisies, numEmptyCells" +
+                        "FROM Zone WHERE  iterationId ="+Long.toString(iteration);
+        Zone[] zones = null;
+        try (Statement sttm = getConnection().createStatement()) {
+            ResultSet howMany = sttm.executeQuery(howManySql);
+            howMany.next();
+            zones = new Zone[howMany.getInt(1)];
+
+            ResultSet result = sttm.executeQuery(sql);
+            int idx;
+            while(result.next()){
+
+                idx = result.getInt(1);
+                zones[idx] = new Zone(
+                        result.getDouble(2),
+                        result.getDouble(3),
+                        result.getDouble(4),
+                        result.getDouble(5),
+                        result.getLong(6),
+                        result.getLong(7),
+                        result.getLong(8)
+
+                );
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
+    public Conditions getConditions(Long iteration){
+        String sql = "SELECT  Kelvin, radius, halfZonation, daiziesPerZone, " +
+                "planetDeltaTemper, blackDaisyAlbedo, whiteDaisyAlbedo, noDaisyAlbedo, aliveHalfGap, " +
+                "comfortHalfGap, blackComfortableTemper, whiteComfortableTemper, StarConstant, StephanBoltsmanConst " +
+                "FROM Conditions WHERE iterationId = "+Long.toString(iteration);
+        Conditions inst = Conditions.getInstance();
+        ResultSet result = null;
+        try (Statement sttm = getConnection().createStatement()) {
+            result = sttm.executeQuery(sql);
+            result.next();
+            inst.Kelvin = result.getDouble(1);
+            inst.radius = result.getDouble(2);
+            inst.halfZonation = result.getInt(3);
+            inst.daiziesPerZone = result.getLong(4);
+            inst.planetDeltaTemper = result.getDouble(5);
+            inst.blackDaisyAlbedo = result.getDouble(6);
+            inst.whiteDaisyAlbedo = result.getDouble(7);
+            inst.noDaisyAlbedo = result.getDouble(8);
+            inst.aliveHalfGap = result.getDouble(9);
+            inst.comfortHalfGap = result.getDouble(10);
+            inst.blackComfortableTemper = result.getDouble(11);
+            inst.whiteComfortableTemper = result.getDouble(12);
+            inst.StarConstant = result.getDouble(13);
+            inst.StephanBoltsmanConst = result.getDouble(14);
 
-    private void persist(Conditions conditions, Planet planet){
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                result.close();
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
 
-    }
-    private Conditions getConditions(Long iteration){
-        return null;
+        }
+
+
+        return inst;
     }
 
 

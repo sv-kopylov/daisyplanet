@@ -21,7 +21,16 @@ public class Zone {
         this.height = height;
     }
 
-//    metrics
+    public Zone(double latitude, double effectiveArea, double height, double localTemperature, long numBlackDaisies, long numWhiteDaisies, long numEmptyCells) {
+        this.latitude = latitude;
+        this.effectiveArea = effectiveArea;
+        this.height = height;
+        this.localTemperature = localTemperature;
+        this.numBlackDaisies = numBlackDaisies;
+        this.numWhiteDaisies = numWhiteDaisies;
+        this.numEmptyCells = numEmptyCells;
+    }
+    //    metrics
 
     /** температура на поверхности в данной area*/
     private double localTemperature;
