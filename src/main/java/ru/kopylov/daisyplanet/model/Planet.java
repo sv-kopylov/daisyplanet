@@ -95,4 +95,44 @@ public class Planet {
     public void setInhabited(boolean inhabited) {
         this.inhabited = inhabited;
     }
+
+    public Long getIterationId() {
+        return iterationId;
+    }
+
+    public void setIterationId(Long iterationId) {
+        this.iterationId = iterationId;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+   public double getEffectiveArea() {
+        return effectiveArea;
+    }
+
+    public void setEffectiveArea(double effectiveArea) {
+        this.effectiveArea = effectiveArea;
+    }
+
+    public double getZoneArea() {
+        return zoneArea;
+    }
+
+    public void setZoneArea(double zoneArea) {
+        this.zoneArea = zoneArea;
+    }
+
+    public double getDaisyArea() {
+        return daisyArea;
+    }
+
+    public void setDaisyArea(double daisyArea) {
+        this.daisyArea = daisyArea;
+    }
 }
