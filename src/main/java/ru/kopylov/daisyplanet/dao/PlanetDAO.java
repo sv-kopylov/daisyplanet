@@ -233,13 +233,14 @@ public class PlanetDAO {
     public Planet[] getPlanets(Long iterationFrom, Long iterationtO){
          return null;
     }
-    private Zone[] getZones(Long iteration){
+    public Zone[] getZones(Long iteration){
         String howManySql = "SELECT count(*) FROM Zone WHERE  iterationId = "+Long.toString(iteration);
 
         String sql = "SELECT id, latitude, effectiveArea, height, localTemperature," +
-                     "numBlackDaisies, numWhiteDaisies, numEmptyCells" +
-                        "FROM Zone WHERE  iterationId ="+Long.toString(iteration);
+                     "numBlackDaisies, numWhiteDaisies, numEmptyCells " +
+                        "FROM Zone WHERE  iterationId = "+Long.toString(iteration);
         Zone[] zones = null;
+
         try (Statement sttm = getConnection().createStatement()) {
             ResultSet howMany = sttm.executeQuery(howManySql);
             howMany.next();
@@ -265,7 +266,7 @@ public class PlanetDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return zones;
     }
     public Conditions getConditions(Long iteration){
         String sql = "SELECT  Kelvin, radius, halfZonation, daiziesPerZone, " +

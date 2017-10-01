@@ -1,5 +1,6 @@
 package ru.kopylov.daisyplanet.tests;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
@@ -15,6 +16,7 @@ import ru.kopylov.daisyplanet.model.Zone;
  * Created by sergey on 25.09.17.
  */
 public class TestDataBase {
+Logger logger = Logger.getLogger(TestDataBase.class);
 
     Zone[] zones;
     int halfFragmentation = 10;
@@ -73,6 +75,32 @@ public class TestDataBase {
         assertTrue("var changed",oldwhiteComfortableTemper == inst.whiteComfortableTemper);
         assertTrue("var changed",oldStarConstant == inst.StarConstant);
         assertTrue("var changed",oldStephanBoltsmanConst == inst.StephanBoltsmanConst);
+
+
+    }
+
+    @Test
+    public void testRetrieveZone(){
+        Planet planet = new Planet();
+        Zone zz = planet.getZones()[4];
+
+        planet.setIterationId(2l);
+        dao.persist(planet);
+
+        Zone[] zones = dao.getZones(2l);
+
+
+        Zone nz = zones[4];
+//        nz.setLocalTemperature(234);
+
+        assertTrue("num zones incorrect", zones.length==planet.getZones().length);
+        assertTrue("incorrect parameter after save",zz.getLatitude()==nz.getLatitude());
+        assertTrue("incorrect parameter after save",zz.getEffectiveArea()==nz.getEffectiveArea());
+        assertTrue("incorrect parameter after save",zz.getHeight()==nz.getHeight());
+        assertTrue("incorrect parameter after save",zz.getLocalTemperature()==nz.getLocalTemperature());
+        assertTrue("incorrect parameter after save",zz.getNumBlackDaisies()==nz.getNumBlackDaisies());
+        assertTrue("incorrect parameter after save",zz.getNumWhiteDaisies()==nz.getNumWhiteDaisies());
+        assertTrue("incorrect parameter after save",zz.getNumEmptyCells()==nz.getNumEmptyCells());
 
 
     }
