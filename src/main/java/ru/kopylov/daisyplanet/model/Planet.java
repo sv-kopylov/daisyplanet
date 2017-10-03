@@ -61,6 +61,18 @@ public class Planet {
         iterationId =0l;
         update();
     }
+    public Planet(Zone[] zones, boolean inhabited, double albedo, double temperature, double radius,
+                  double effectiveArea, double zoneArea, double daisyArea ){
+        this.star = new Starr();
+        this.zones = zones;
+        this.inhabited = inhabited;
+        this.albedo = albedo;
+        this.temperature = temperature;
+        this.radius = radius;
+        this.effectiveArea = effectiveArea;
+        this.zoneArea = zoneArea;
+        this.daisyArea = daisyArea;
+    }
 
 
     public void update() {

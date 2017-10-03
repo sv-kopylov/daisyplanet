@@ -3,6 +3,8 @@ package ru.kopylov.daisyplanet.tests;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import ru.kopylov.daisyplanet.dao.PlanetDAO;
@@ -101,6 +103,42 @@ Logger logger = Logger.getLogger(TestDataBase.class);
         assertTrue("incorrect parameter after save",zz.getNumBlackDaisies()==nz.getNumBlackDaisies());
         assertTrue("incorrect parameter after save",zz.getNumWhiteDaisies()==nz.getNumWhiteDaisies());
         assertTrue("incorrect parameter after save",zz.getNumEmptyCells()==nz.getNumEmptyCells());
+
+
+    }
+    @Test
+    public void testPlanetRetrieving(){
+        Planet op = new Planet();
+        Zone zz = op.getZones()[5];
+
+        op.setIterationId(5l);
+        dao.persist(op);
+
+        Planet np = dao.getPlanet(5l);
+        Zone nz = np.getZones()[5];
+
+        assertTrue("incorrect Planet parameter after save", op.getZones().length == np.getZones().length );
+        assertTrue("incorrect Planet parameter after save", op.isInhabited() == np.isInhabited() );
+        assertEquals(op.getAlbedo(),np.getAlbedo(), 0.00001);
+        assertEquals(op.getTemperature(),np.getTemperature(), 0.00001);
+        assertEquals(op.getRadius(),np.getRadius(), 0.00001);
+        assertEquals(op.getEffectiveArea(),np.getEffectiveArea(), 0.00001);
+        assertEquals(op.getZoneArea(),np.getZoneArea(), 0.00001);
+        assertEquals(op.getDaisyArea(),np.getDaisyArea(), 0.00001);
+
+/*inhabited, albedo, " +
+                "temperature, radius, effectiveArea, zoneArea, daisyArea " +
+* */
+
+        assertEquals(zz.getLatitude(),nz.getLatitude(), 0000.1);
+        assertEquals(zz.getEffectiveArea(),nz.getEffectiveArea(), 0000.1);
+        assertEquals(zz.getHeight(),nz.getHeight(), 0000.1);
+        assertEquals(zz.getLocalTemperature(),nz.getLocalTemperature(), 0000.1);
+        assertEquals(zz.getNumBlackDaisies(),nz.getNumBlackDaisies());
+        assertEquals(zz.getNumWhiteDaisies(),nz.getNumWhiteDaisies());
+        assertEquals(zz.getNumEmptyCells(),nz.getNumEmptyCells());
+
+       
 
 
     }

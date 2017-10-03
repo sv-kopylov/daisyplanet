@@ -1,5 +1,6 @@
 package ru.kopylov.daisyplanet.dao;
 
+import org.apache.log4j.Logger;
 import ru.kopylov.daisyplanet.model.Conditions;
 import ru.kopylov.daisyplanet.model.Planet;
 import ru.kopylov.daisyplanet.model.Zone;
@@ -10,6 +11,7 @@ import java.sql.*;
  * Created by sergey on 20.09.17.
  */
 public class PlanetDAO {
+    Logger logger = Logger.getLogger(PlanetDAO.class);
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost";
@@ -228,11 +230,36 @@ public class PlanetDAO {
     }
 
     public Planet getPlanet(Long iteration){
-        return null;
+        this.getConditions(iteration);
+        Zone [] zones = this.getZones(iteration);
+        Planet planet = null;
+
+        String sql = "SELECT  inhabited, albedo, " +
+                "temperature, radius, effectiveArea, zoneArea, daisyArea " +
+                "FROM Planet WHERE iterationId = "+Long.toString(iteration);
+        try (Statement sttm = getConnection().createStatement()){
+            ResultSet result = sttm.executeQuery(sql);
+            result.next();
+
+            planet = new Planet(zones,
+                    result.getBoolean(1),
+                    result.getDouble(2),
+                    result.getDouble(3),
+                    result.getDouble(4),
+                    result.getDouble(5),
+                    result.getDouble(6),
+                    result.getDouble(7)
+                    );
+            planet.setIterationId(iteration);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return planet;
     }
-    public Planet[] getPlanets(Long iterationFrom, Long iterationtO){
-         return null;
-    }
+
     public Zone[] getZones(Long iteration){
         String howManySql = "SELECT count(*) FROM Zone WHERE  iterationId = "+Long.toString(iteration);
 
