@@ -59,7 +59,7 @@ public class Planet {
         zoneArea = 2*Math.PI*radius*(radius/halfZonation);
         daisyArea = zoneArea/daiziesPerZone;
         iterationId =0l;
-        update();
+//        update();
     }
     public Planet(Zone[] zones, boolean inhabited, double albedo, double temperature, double radius,
                   double effectiveArea, double zoneArea, double daisyArea ){

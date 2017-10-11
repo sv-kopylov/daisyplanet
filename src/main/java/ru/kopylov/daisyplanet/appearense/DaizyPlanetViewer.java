@@ -27,18 +27,24 @@ public class DaizyPlanetViewer extends Application{
         primaryStage.setTitle("Daizy planet view");
         Group root = new Group();
 
-        Canvas canvas= new Canvas(800, 800);
+        Canvas canvas= new Canvas(560, 560);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Planet planet = new Planet();
         PlanetLayer pl = new PlanetLayer(planet);
-
+        for (int i=0;i<10;i++){
+            planet.update();
+        }
+        gc.setFill(Color.OLIVE);
+        pl.setColors(planet);
+        gc.fillOval(7,7,547,547);
 
         pl.ekspose(gc);
+        gc.strokeRect(0,0,559, 559);
 
 
 
 
-        Scene scene = new Scene(root, 600, 300);
+        Scene scene = new Scene(root, 620, 640);
 
         root.getChildren().add(canvas);
 

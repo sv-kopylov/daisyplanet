@@ -2,6 +2,7 @@ package ru.kopylov.daisyplanet.appearense;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import ru.kopylov.daisyplanet.model.Conditions;
 import ru.kopylov.daisyplanet.model.Planet;
 import ru.kopylov.daisyplanet.model.Zone;
 
@@ -13,11 +14,16 @@ import java.util.Random;
  */
 public class PlanetLayer {
     DaizyUnit[][] daizyUnits;
+    Color baseColor = Color.OLIVE;
+    Color white = Color.WHITE;
+    Color black = Color.BLACK;
+    private int MAX_RADIUS = 90;
+    private int POINT_DIAMETER = 3;
 
     public PlanetLayer(Planet planet) throws Exception {
-        Zone [] zones = planet.getZones();
+         Zone [] zones = planet.getZones();
         int height = zones.length;
-        if(height>90){
+        if(height>MAX_RADIUS ){
             throw new Exception("Planet too big, scalling not implemented");
         }
         daizyUnits = new DaizyUnit[height*2][];
@@ -28,44 +34,65 @@ public class PlanetLayer {
             daizyUnits[height+i] = new DaizyUnit[width];
         }
 
-Color col = Color.CHOCOLATE;
+
         for(int i=0; i<daizyUnits.length; i++){
             for(int j=0;j<daizyUnits[i].length; j++){
-                if(j<daizyUnits[i].length/2){
-                    col=Color.GREEN;
+                daizyUnits[i][j] = new DaizyUnit(
+                        + j*POINT_DIAMETER - daizyUnits[i].length*POINT_DIAMETER/2 +280,
+                        i*POINT_DIAMETER+10,
+                        baseColor
+                );
+
+            }
+        }
+
+
+    }
+
+    public void setColors(Planet planet){
+        Zone[] zones = planet.getZones();
+        int blackNum;
+        int whiteNum;
+        int zoneIndex;
+        long numCells = Conditions.getInstance().daiziesPerZone;
+        Color currentColor;
+
+        for(int i=0; i<daizyUnits.length/2; i++){
+            zoneIndex = zones.length-1-i;
+            blackNum=(int)(daizyUnits[i].length*zones[zoneIndex].getNumBlackDaisies()/numCells);
+            whiteNum=blackNum+(int)(daizyUnits[i].length*zones[zoneIndex].getNumWhiteDaisies()/numCells);
+
+            for(int j=0;j<daizyUnits[i].length; j++){
+                if(j<=blackNum){
+                    currentColor = black;
+                } else if(j<=whiteNum){
+                    currentColor = white;
+                } else {
+                    currentColor = baseColor;
                 }
-                daizyUnits[i][j] = new DaizyUnit(
-                        + j*3 - daizyUnits[i].length*3/2 +300,
-                        i*3+50,
-                         col
-                );
-                col=Color.CHOCOLATE;
-            }
-        }
-
-
-    }
-
-    public PlanetLayer() {
-        int h = 100;
-        int w = 100;
-        Color[] colors = {Color.GREEN, Color.RED, Color.BLACK
-                            };
-        Random rnd = new Random();
-        daizyUnits = new DaizyUnit[h][w];
-        for(int i=0; i<h; i++){
-            for(int j=0; j<w; j++){
-                daizyUnits[i][j] = new DaizyUnit(
-                        50+i*3,
-                        50+j*3,
-                        colors[rnd.nextInt(3)]
-                );
+                daizyUnits[i][j].setColor(currentColor);
+                daizyUnits[daizyUnits.length - 1 -i][j].setColor(currentColor);
 
             }
         }
-    }
+//        ---
+//        for(int i=daizyUnits.length/2; i<daizyUnits.length; i++){
+//            blackNum=(int)(daizyUnits[i].length*zones[i].getNumBlackDaisies()/numCells);
+//            whiteNum=blackNum+(int)(daizyUnits[i].length*zones[i].getNumWhiteDaisies()/numCells);
+//
+//            for(int j=0;j<daizyUnits[i].length; j++){
+//                if(j<=blackNum){
+//                    currentColor = black;
+//                } else if(j<=whiteNum){
+//                    currentColor = white;
+//                } else {
+//                    currentColor = baseColor;
+//                }
+//                daizyUnits[i][j].setColor(currentColor);
+//
+//            }
+//        }
 
-    public void setColours(Planet planet){
 
     }
 
