@@ -4,14 +4,17 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 /**
- * Created by sergey on 05.10.17.
+ * Created by sergey on 11.10.17.
  */
-public class DaizyUnit {
+public class TemperatureUnit {
     private float x;
     private float y;
     private Color color;
+    final int UNIT_H=3;
+    final int UNIT_W=20;
 
-    public DaizyUnit(float x, float y, Color color) {
+
+    public TemperatureUnit(float x, float y, Color color) {
         this.x = x;
         this.y = y;
         this.color = color;
@@ -31,13 +34,8 @@ public class DaizyUnit {
 
     public void expose (GraphicsContext gc){
         gc.setFill(color);
-        gc.fillOval(x,y,3,3);
+        gc.fillRect(x,y,UNIT_W,UNIT_H);
 
 
     }
-
-
-
-
-
 }

@@ -6,8 +6,6 @@ import ru.kopylov.daisyplanet.model.Conditions;
 import ru.kopylov.daisyplanet.model.Planet;
 import ru.kopylov.daisyplanet.model.Zone;
 
-import java.util.Arrays;
-import java.util.Random;
 
 /**
  * Created by sergey on 05.10.17.
@@ -75,28 +73,13 @@ public class PlanetLayer {
 
             }
         }
-//        ---
-//        for(int i=daizyUnits.length/2; i<daizyUnits.length; i++){
-//            blackNum=(int)(daizyUnits[i].length*zones[i].getNumBlackDaisies()/numCells);
-//            whiteNum=blackNum+(int)(daizyUnits[i].length*zones[i].getNumWhiteDaisies()/numCells);
-//
-//            for(int j=0;j<daizyUnits[i].length; j++){
-//                if(j<=blackNum){
-//                    currentColor = black;
-//                } else if(j<=whiteNum){
-//                    currentColor = white;
-//                } else {
-//                    currentColor = baseColor;
-//                }
-//                daizyUnits[i][j].setColor(currentColor);
-//
-//            }
-//        }
-
 
     }
 
     public void ekspose(GraphicsContext gc){
+        gc.setFill(Color.OLIVE);
+        gc.fillOval(7,7,547,547);
+        gc.strokeRect(0,0,589, 559);
         for(DaizyUnit[] unitsArr: daizyUnits){
             for(DaizyUnit unit: unitsArr){
                 unit.expose(gc);
