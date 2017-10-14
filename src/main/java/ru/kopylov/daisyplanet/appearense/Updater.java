@@ -3,10 +3,9 @@ package ru.kopylov.daisyplanet.appearense;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.util.converter.NumberStringConverter;
 import ru.kopylov.daisyplanet.model.Conditions;
 import ru.kopylov.daisyplanet.model.Planet;
@@ -20,7 +19,9 @@ public class Updater implements EventHandler {
     private final TemperatureLayer tl;
     private final GraphicsContext gc;
 
-    private final GridPane pane = new GridPane();
+    private final TitledPane titledPane = new TitledPane();
+    private final VBox vBox = new VBox();
+
     private final Button button = new Button();
     private final TextField timesField = new TextField();
     private final TextField incrementOnField = new TextField();
@@ -31,16 +32,52 @@ public class Updater implements EventHandler {
     private double incrementOn=0;
 
 
+
+
     public Updater(Planet planet, PlanetLayer pl, TemperatureLayer tl, GraphicsContext gc) {
         this.planet = planet;
         this.pl = pl;
         this.tl = tl;
         this.gc = gc;
         button.setText("Update");
+        button.setLayoutX(1);
+        button.setLayoutY(1);
         button.setOnAction(this);
         timesField.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
         incrementOnField.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
         everyField.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
+        timesField.setPrefColumnCount(5);
+        incrementOnField.setPrefColumnCount(4);
+        everyField.setPrefColumnCount(4);
+        timesField.setText("1");
+        incrementOnField.setText("0");
+        everyField.setText("0");
+
+        titledPane.setGraphic(new Label("Updater"));
+
+        vBox.getChildren().add(button);
+        HBox hBoxTms = new HBox();
+        hBoxTms.getChildren().add(timesField);
+        hBoxTms.getChildren().add(new Label(" times, "));
+        vBox.getChildren().add(hBoxTms);
+        vBox.getChildren().add(new Label("and increment star constant"));
+        HBox hBoxIncr = new HBox();
+        hBoxIncr.getChildren().add(new Label("on"));
+        hBoxIncr.getChildren().add(incrementOnField);
+        hBoxIncr.getChildren().add(new Label(" every"));
+        hBoxIncr.getChildren().add(everyField);
+        vBox.getChildren().add(hBoxIncr);
+//        HBox hBoxEvery = new HBox();
+//        hBoxEvery.getChildren().add(new Label("every"));
+//        hBoxEvery.getChildren().add(everyField);
+//        vBox.getChildren().add(hBoxEvery);
+        vBox.getChildren().add(new Label("iteration(s)"));
+
+       titledPane.setContent(vBox);
+
+
+
+
     }
 
     @Override
@@ -52,7 +89,7 @@ public class Updater implements EventHandler {
         updateNumbers();
         for (int i=0; i<times;i++){
             planet.update();
-            if(every!=0&&i!=0){
+            if(every!=0){
                 if(i%every==0){
                     Conditions.getInstance().StarConstant+=incrementOn;
                 }
@@ -73,12 +110,14 @@ public class Updater implements EventHandler {
             times = Math.abs(Integer.parseInt(timesField.getText()));
             incrementOn = Double.parseDouble(incrementOnField.getText());
             every = Math.abs(Integer.parseInt(everyField.getText()));
-            if(every==0) every=1;
-        } catch (NumberFormatException e){
+             } catch (NumberFormatException e){
 
         }
     }
 
 
+    public TitledPane getPane(){
+        return titledPane;
+    }
 
 }

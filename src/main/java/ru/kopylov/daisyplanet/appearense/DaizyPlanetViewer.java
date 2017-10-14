@@ -41,37 +41,20 @@ public class DaizyPlanetViewer extends Application{
         pl.ekspose(gc);
         tl.ekspose(gc);
 
-        Canvas infoCanvas = new Canvas(610, 560);
-        GraphicsContext infoGc =infoCanvas.getGraphicsContext2D();
-        infoGc.setStroke(Color.GOLD);
-        infoGc.strokeRect(10, 10, 50, 50);
+        Updater updater = new Updater(planet, pl, tl, gc);
 
-        Button updateButton = new Button();
-        updateButton.setLayoutX(1);
-        updateButton.setLayoutY(1);
-        updateButton.setText("update");
-        updateButton.setOnAction(event-> {
-            planet.update();
-            pl.setColors(planet);
-            pl.ekspose(gc);
 
-            tl.setColors(planet);
-            tl.ekspose(gc);
-        });
 
         Pane pane = new Pane();
         pane.getChildren().add(canvas);
-        pane.getChildren().add(infoCanvas);
-        infoCanvas.toFront();
+
 
         borderPane.setCenter(pane);
-        borderPane.setLeft(updateButton);
+        borderPane.setLeft(updater.getPane());
 
 
-        Scene scene = new Scene(root, 670, 640);
+        Scene scene = new Scene(root, 850, 600);
         root.getChildren().add(borderPane);
-
-
         primaryStage.setScene(scene);
         primaryStage.show();
 
