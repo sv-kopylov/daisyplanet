@@ -77,6 +77,8 @@ public class PlanetLayer {
     }
 
     public void ekspose(GraphicsContext gc){
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0, 0, 610, 560);
         gc.setFill(Color.OLIVE);
         gc.fillOval(7,7,547,547);
         gc.strokeRect(0,0,589, 559);

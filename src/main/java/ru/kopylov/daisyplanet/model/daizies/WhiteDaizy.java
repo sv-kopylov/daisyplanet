@@ -26,4 +26,11 @@ public class WhiteDaizy extends Daisy {
         return (Math.abs(temperature - Conditions.getInstance().whiteComfortableTemper)
                 <= Conditions.getInstance().aliveHalfGap);
     }
+
+    public static boolean isToHot(double temperature){
+        return temperature>Conditions.getInstance().whiteComfortableTemper+Conditions.getInstance().aliveHalfGap;
+    }
+    public static boolean isToCold(double temperature){
+        return temperature<Conditions.getInstance().whiteComfortableTemper-Conditions.getInstance().aliveHalfGap;
+    }
 }

@@ -7,8 +7,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Ellipse;
 import javafx.stage.Stage;
 import ru.kopylov.daisyplanet.model.Planet;
 
@@ -35,10 +36,15 @@ public class DaizyPlanetViewer extends Application{
         primaryStage.setTitle("Daizy planet view");
         Group root = new Group();
         BorderPane borderPane = new BorderPane();
-        Canvas canvas= new Canvas(590, 560);
+        Canvas canvas= new Canvas(610, 560);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         pl.ekspose(gc);
         tl.ekspose(gc);
+
+        Canvas infoCanvas = new Canvas(610, 560);
+        GraphicsContext infoGc =infoCanvas.getGraphicsContext2D();
+        infoGc.setStroke(Color.GOLD);
+        infoGc.strokeRect(10, 10, 50, 50);
 
         Button updateButton = new Button();
         updateButton.setLayoutX(1);
@@ -49,14 +55,20 @@ public class DaizyPlanetViewer extends Application{
             pl.setColors(planet);
             pl.ekspose(gc);
 
+            tl.setColors(planet);
+            tl.ekspose(gc);
         });
 
+        Pane pane = new Pane();
+        pane.getChildren().add(canvas);
+        pane.getChildren().add(infoCanvas);
+        infoCanvas.toFront();
 
-        borderPane.setCenter(canvas);
+        borderPane.setCenter(pane);
         borderPane.setLeft(updateButton);
 
 
-        Scene scene = new Scene(root, 620, 640);
+        Scene scene = new Scene(root, 670, 640);
         root.getChildren().add(borderPane);
 
 
@@ -66,6 +78,10 @@ public class DaizyPlanetViewer extends Application{
     }
 
     public void stop(){
+
+    }
+
+    public void update(){
 
     }
 }

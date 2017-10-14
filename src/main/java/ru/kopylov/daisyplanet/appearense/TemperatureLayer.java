@@ -4,6 +4,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import ru.kopylov.daisyplanet.model.Conditions;
 import ru.kopylov.daisyplanet.model.Planet;
+import ru.kopylov.daisyplanet.model.Zone;
+import ru.kopylov.daisyplanet.model.daizies.BlackDaisy;
+import ru.kopylov.daisyplanet.model.daizies.WhiteDaizy;
 
 /**
  * Created by sergey on 11.10.17.
@@ -38,12 +41,12 @@ public class TemperatureLayer {
                     coldDeadTemper
                     );
             whiteScale[i] = new TemperatureUnit(
-                    RIGHT_BORDER+UNIT_W,
+                    RIGHT_BORDER+UNIT_W +2,
                     TOP+i*UNIT_H,
                     coldDeadTemper
                     );
             whiteScale[j] = new TemperatureUnit(
-                    RIGHT_BORDER+UNIT_W,
+                    RIGHT_BORDER+UNIT_W+2,
                     TOP+j*UNIT_H,
                     coldDeadTemper
                     );
@@ -57,7 +60,45 @@ public class TemperatureLayer {
         }
     }
 
+    public void setColors(Planet planet){
+        Color currentBlack;
+        Color currentWhite;
+        double temper;
+        Zone[] zones = planet.getZones();
+        for(int i=0; i<zones.length; i++){
+            temper=zones[i].getLocalTemperature();
 
+            if(BlackDaisy.isComfortable(temper)){
+                currentBlack = comfortTekmper;
+            } else if (BlackDaisy.isFitForLife(temper)){
+                currentBlack = aliveTemper;
+            } else if(BlackDaisy.isToCold(temper)){
+                currentBlack = coldDeadTemper;
+            } else {
+                currentBlack =hotDeadTemper;
+            }
+
+            if(WhiteDaizy.isComfortable(temper)){
+                currentWhite = comfortTekmper;
+            } else if (WhiteDaizy.isFitForLife(temper)){
+                currentWhite = aliveTemper;
+            } else if(WhiteDaizy.isToCold(temper)){
+                currentWhite = coldDeadTemper;
+            } else {
+                currentWhite =hotDeadTemper;
+            }
+
+            blackScale[zones.length-1-i].setColor(currentBlack);
+            whiteScale[zones.length-1-i].setColor(currentWhite);
+
+            blackScale[zones.length+i].setColor(currentBlack);
+            whiteScale[zones.length+i].setColor(currentWhite);
+
+        }
+
+
+
+    }
 
 
 
