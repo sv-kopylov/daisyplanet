@@ -17,6 +17,7 @@ public class Updater implements EventHandler {
     private final Planet planet;
     private final PlanetLayer pl;
     private final TemperatureLayer tl;
+    private final InfoLayer il;
     private final GraphicsContext gc;
 
     private final TitledPane titledPane = new TitledPane();
@@ -39,6 +40,7 @@ public class Updater implements EventHandler {
         this.pl = pl;
         this.tl = tl;
         this.gc = gc;
+        il=new InfoLayer(planet);
         button.setText("Update");
         button.setLayoutX(1);
         button.setLayoutY(1);
@@ -67,13 +69,8 @@ public class Updater implements EventHandler {
         hBoxIncr.getChildren().add(new Label(" every"));
         hBoxIncr.getChildren().add(everyField);
         vBox.getChildren().add(hBoxIncr);
-//        HBox hBoxEvery = new HBox();
-//        hBoxEvery.getChildren().add(new Label("every"));
-//        hBoxEvery.getChildren().add(everyField);
-//        vBox.getChildren().add(hBoxEvery);
         vBox.getChildren().add(new Label("iteration(s)"));
-
-       titledPane.setContent(vBox);
+        titledPane.setContent(vBox);
 
 
 
@@ -94,8 +91,6 @@ public class Updater implements EventHandler {
                     Conditions.getInstance().StarConstant+=incrementOn;
                 }
             }
-
-
         }
 
         pl.setColors(planet);
@@ -103,6 +98,9 @@ public class Updater implements EventHandler {
 
         tl.setColors(planet);
         tl.ekspose(gc);
+
+        il.setInfo(planet);
+        il.ekspose(gc);
     }
 
     private void updateNumbers(){

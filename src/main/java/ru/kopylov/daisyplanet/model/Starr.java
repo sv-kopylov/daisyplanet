@@ -8,13 +8,10 @@ public class Starr {
     /**Звездная постоянная - суммарная мощность излучения звезды, проходящего через единичную площадку,
      * ориентированную перпендикулярно потоку, на расстоянии одной астрономической единицы от Звезды
      * для Солнца и Земли равняется 1367 Вт/м²*/
-    private double StarConstant = Conditions.getInstance().StarConstant;
+
 
     public double getStarConstant() {
-        return StarConstant;
+        return Conditions.getInstance().StarConstant;
     }
 
-    public void setStarConstant(double starConstant) {
-        StarConstant = starConstant;
-    }
-}
+   }
