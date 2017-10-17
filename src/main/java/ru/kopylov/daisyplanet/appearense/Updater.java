@@ -45,9 +45,6 @@ public class Updater implements EventHandler {
         button.setLayoutX(1);
         button.setLayoutY(1);
         button.setOnAction(this);
-        timesField.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
-        incrementOnField.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
-        everyField.setTextFormatter(new TextFormatter<>(new NumberStringConverter()));
         timesField.setPrefColumnCount(5);
         incrementOnField.setPrefColumnCount(4);
         everyField.setPrefColumnCount(4);
@@ -83,6 +80,7 @@ public class Updater implements EventHandler {
 
     }
     private void update(){
+        titledPane.setDisable(true);
         updateNumbers();
         for (int i=0; i<times;i++){
             planet.update();
@@ -101,6 +99,7 @@ public class Updater implements EventHandler {
 
         il.setInfo(planet);
         il.ekspose(gc);
+        titledPane.setDisable(false);
     }
 
     private void updateNumbers(){
@@ -109,7 +108,7 @@ public class Updater implements EventHandler {
             incrementOn = Double.parseDouble(incrementOnField.getText());
             every = Math.abs(Integer.parseInt(everyField.getText()));
              } catch (NumberFormatException e){
-
+            e.printStackTrace();
         }
     }
 

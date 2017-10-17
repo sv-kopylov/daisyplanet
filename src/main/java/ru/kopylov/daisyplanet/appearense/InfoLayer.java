@@ -12,6 +12,7 @@ public class InfoLayer {
     String temperature;
     String albedo;
     String starConstant;
+    String iteration;
 
 
     Color infoColor = Color.GOLD;
@@ -24,6 +25,7 @@ public class InfoLayer {
         gc.fillText(temperature, 10,12);
         gc.fillText(starConstant, 10,24);
         gc.fillText(albedo, 10,36);
+        gc.fillText(iteration, 10,48);
 
 
     }
@@ -31,6 +33,7 @@ public class InfoLayer {
         temperature = "Temperature: "+String.format("%+3.0f ", planet.getTemperature());
         starConstant = "Star energy: "+String.format("%+3.0f ", Conditions.getInstance().StarConstant);
         albedo = "Albedo: "+String.format("%+1.3f ", planet.getAlbedo());
+        iteration = "Iteration: "+planet.getIterationId();
 
 
     }

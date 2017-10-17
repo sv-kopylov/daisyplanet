@@ -21,12 +21,21 @@ public class TemperatureLayer {
     Color comfortTekmper = Color.GREEN;
     Color aliveTemper = Color.YELLOW;
 
+    Color scaleCollor = Color.GOLDENROD;
+
+    String polarTemper="0";
+    String middleTemper = "0";
+    String equatorTemper ="0";
+
+    int height = 0;
+
     TemperatureUnit[] blackScale;
     TemperatureUnit[] whiteScale;
 
     public TemperatureLayer(Planet planet) {
         blackScale = new TemperatureUnit[planet.getZones().length*2];
         whiteScale = new TemperatureUnit[planet.getZones().length*2];
+        height = planet.getZones().length*2*UNIT_H;
         int j;
         for(int i=0; i<blackScale.length/2; i++){
             j=i+blackScale.length/2;
@@ -58,6 +67,13 @@ public class TemperatureLayer {
             blackScale[i].expose(gc);
             whiteScale[i].expose(gc);
         }
+        gc.setFill(scaleCollor);
+        gc.fillText(polarTemper, RIGHT_BORDER - 25, TOP*2);
+        gc.fillText(middleTemper, RIGHT_BORDER- 25, height/4);
+        gc.fillText(equatorTemper, RIGHT_BORDER- 25, height/2);
+        gc.fillText(middleTemper, RIGHT_BORDER- 25, height*3/4);
+        gc.fillText(polarTemper, RIGHT_BORDER- 25, height);
+
     }
 
     public void setColors(Planet planet){
@@ -95,6 +111,10 @@ public class TemperatureLayer {
             whiteScale[zones.length+i].setColor(currentWhite);
 
         }
+
+        polarTemper = String.format("%+3.0f ", zones[zones.length-1].getLocalTemperature()+Conditions.getInstance().Kelvin);
+        middleTemper = String.format("%+3.0f ", zones[zones.length/2].getLocalTemperature()+Conditions.getInstance().Kelvin);
+        equatorTemper = String.format("%+3.0f ", zones[0].getLocalTemperature()+Conditions.getInstance().Kelvin);
 
 
 

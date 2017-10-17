@@ -81,6 +81,7 @@ public class Planet {
         updateLocalTempers();
         populator.rePopulate(this);
         iterationId++;
+        System.out.println("iteration: "+iterationId);
 
     }
 
