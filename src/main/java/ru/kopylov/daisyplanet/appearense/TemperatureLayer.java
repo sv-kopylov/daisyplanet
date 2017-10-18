@@ -14,8 +14,9 @@ import ru.kopylov.daisyplanet.model.daizies.WhiteDaizy;
 public class TemperatureLayer {
     final int UNIT_H=3;
     final int UNIT_W=20;
-    final int RIGHT_BORDER = 560;
+    final int RIGHT_BORDER = 580;
     final int TOP = 7;
+    final int DELTA = 35;
     Color hotDeadTemper = Color.RED;
     Color coldDeadTemper = Color.BLUE;
     Color comfortTekmper = Color.GREEN;
@@ -68,11 +69,11 @@ public class TemperatureLayer {
             whiteScale[i].expose(gc);
         }
         gc.setFill(scaleCollor);
-        gc.fillText(polarTemper, RIGHT_BORDER - 25, TOP*2);
-        gc.fillText(middleTemper, RIGHT_BORDER- 25, height/4);
-        gc.fillText(equatorTemper, RIGHT_BORDER- 25, height/2);
-        gc.fillText(middleTemper, RIGHT_BORDER- 25, height*3/4);
-        gc.fillText(polarTemper, RIGHT_BORDER- 25, height);
+        gc.fillText(polarTemper, RIGHT_BORDER - DELTA, TOP*2);
+        gc.fillText(middleTemper, RIGHT_BORDER- DELTA, height/4);
+        gc.fillText(equatorTemper, RIGHT_BORDER- DELTA, height/2);
+        gc.fillText(middleTemper, RIGHT_BORDER- DELTA, height*3/4);
+        gc.fillText(polarTemper, RIGHT_BORDER- DELTA, height);
 
     }
 

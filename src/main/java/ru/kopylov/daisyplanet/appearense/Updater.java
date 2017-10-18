@@ -35,12 +35,12 @@ public class Updater implements EventHandler {
 
 
 
-    public Updater(Planet planet, PlanetLayer pl, TemperatureLayer tl, GraphicsContext gc) {
+    public Updater(Planet planet, PlanetLayer pl, TemperatureLayer tl, InfoLayer il, GraphicsContext gc) {
         this.planet = planet;
         this.pl = pl;
         this.tl = tl;
         this.gc = gc;
-        il=new InfoLayer(planet);
+        this.il = il;
         button.setText("Update");
         button.setLayoutX(1);
         button.setLayoutY(1);

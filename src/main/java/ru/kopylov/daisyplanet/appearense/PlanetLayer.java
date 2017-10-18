@@ -61,9 +61,9 @@ public class PlanetLayer {
             whiteNum=blackNum+(int)(daizyUnits[i].length*zones[zoneIndex].getNumWhiteDaisies()/numCells);
 
             for(int j=0;j<daizyUnits[i].length; j++){
-                if(j<=blackNum){
+                if(j<blackNum){
                     currentColor = black;
-                } else if(j<=whiteNum){
+                } else if(j<whiteNum){
                     currentColor = white;
                 } else {
                     currentColor = baseColor;
@@ -78,10 +78,10 @@ public class PlanetLayer {
 
     public void ekspose(GraphicsContext gc){
         gc.setFill(Color.BLACK);
-        gc.fillRect(0, 0, 610, 560);
+        gc.fillRect(0, 0, 630, 560);
         gc.setFill(Color.OLIVE);
         gc.fillOval(7,7,547,547);
-        gc.strokeRect(0,0,589, 559);
+//        gc.strokeRect(0,0,589, 559);
         for(DaizyUnit[] unitsArr: daizyUnits){
             for(DaizyUnit unit: unitsArr){
                 unit.expose(gc);

@@ -59,7 +59,9 @@ public class Planet {
         zoneArea = 2*Math.PI*radius*(radius/halfZonation);
         daisyArea = zoneArea/daiziesPerZone;
         iterationId =0l;
-//        update();
+        albedo = albedoCalculator.calcAlbedo(zones);
+        temperature = StephanBoltsman.countTemperature(albedo,star.getStarConstant());
+
     }
     public Planet(Zone[] zones, boolean inhabited, double albedo, double temperature, double radius,
                   double effectiveArea, double zoneArea, double daisyArea ){
@@ -74,6 +76,9 @@ public class Planet {
         this.daisyArea = daisyArea;
     }
 
+    public void populate(int white, int black, int none){
+        populator.populateInitial(zones, white, black, none);
+    }
 
     public void update() {
         albedo = albedoCalculator.calcAlbedo(zones);
