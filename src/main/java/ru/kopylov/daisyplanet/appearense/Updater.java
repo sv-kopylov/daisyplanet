@@ -19,6 +19,7 @@ public class Updater implements EventHandler {
     private final TemperatureLayer tl;
     private final InfoLayer il;
     private final GraphicsContext gc;
+    private  final Charts charts;
 
     private final TitledPane titledPane = new TitledPane();
     private final VBox vBox = new VBox();
@@ -35,12 +36,13 @@ public class Updater implements EventHandler {
 
 
 
-    public Updater(Planet planet, PlanetLayer pl, TemperatureLayer tl, InfoLayer il, GraphicsContext gc) {
+    public Updater(Planet planet, PlanetLayer pl, TemperatureLayer tl, InfoLayer il, GraphicsContext gc, Charts charts) {
         this.planet = planet;
         this.pl = pl;
         this.tl = tl;
         this.gc = gc;
         this.il = il;
+        this.charts = charts;
         button.setText("Update");
         button.setLayoutX(1);
         button.setLayoutY(1);
@@ -84,6 +86,7 @@ public class Updater implements EventHandler {
         updateNumbers();
         for (int i=0; i<times;i++){
             planet.update();
+            addDataToCharts();
             if(every!=0){
                 if(i%every==0){
                     Conditions.getInstance().StarConstant+=incrementOn;
@@ -115,6 +118,11 @@ public class Updater implements EventHandler {
 
     public TitledPane getPane(){
         return titledPane;
+    }
+
+    private void addDataToCharts(){
+        charts.addTemper(planet.getIterationId(), planet.getTemperature());
+        charts.addStarConst(planet.getIterationId(), Conditions.getInstance().StarConstant);
     }
 
 }

@@ -44,8 +44,10 @@ public class DaizyPlanetViewer extends Application{
         pl.ekspose(gc);
         tl.ekspose(gc);
 
-        Updater updater = new Updater(planet, pl, tl, il, gc);
+        Charts charts = new Charts(primaryStage);
+        Updater updater = new Updater(planet, pl, tl, il, gc, charts);
         Populator populator = new Populator(planet, pl, tl, il, gc);
+
 
         VBox leftPannel = new VBox();
 
@@ -56,7 +58,7 @@ public class DaizyPlanetViewer extends Application{
 
         borderPane.setCenter(pane);
 
-        leftPannel.getChildren().addAll(populator.getPane(), updater.getPane());
+        leftPannel.getChildren().addAll(populator.getPane(), updater.getPane(), charts.getPane());
         borderPane.setLeft(leftPannel);
 
 
@@ -71,7 +73,5 @@ public class DaizyPlanetViewer extends Application{
 
     }
 
-    public void update(){
 
-    }
 }
