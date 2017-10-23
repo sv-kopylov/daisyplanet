@@ -35,7 +35,6 @@ public class DaizyPlanetViewer extends Application{
         TemperatureLayer tl = new TemperatureLayer(planet);
         InfoLayer il = new InfoLayer(planet);
 
-
         primaryStage.setTitle("Daizy planet view");
         Group root = new Group();
         BorderPane borderPane = new BorderPane();
@@ -44,8 +43,8 @@ public class DaizyPlanetViewer extends Application{
         pl.ekspose(gc);
         tl.ekspose(gc);
 
-        Charts charts = new Charts(primaryStage);
-        Updater updater = new Updater(planet, pl, tl, il, gc, charts);
+        Charts charts = new Charts();
+        Updater updater = new Updater(planet, pl, tl, il, gc, charts, borderPane);
         Populator populator = new Populator(planet, pl, tl, il, gc);
 
 
@@ -58,11 +57,12 @@ public class DaizyPlanetViewer extends Application{
 
         borderPane.setCenter(pane);
 
-        leftPannel.getChildren().addAll(populator.getPane(), updater.getPane(), charts.getPane());
+        leftPannel.getChildren().addAll(populator.getPane(), updater.getPane());
         borderPane.setLeft(leftPannel);
+        borderPane.setRight(charts.getPane());
 
 
-        Scene scene = new Scene(root, 850, 600);
+        Scene scene = new Scene(root, 1280, 600);
         root.getChildren().add(borderPane);
         primaryStage.setScene(scene);
         primaryStage.show();

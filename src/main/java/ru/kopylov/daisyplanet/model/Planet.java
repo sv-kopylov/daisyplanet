@@ -54,7 +54,7 @@ public class Planet {
         this.star = new Starr();
         zones = ZoneMaker.makeZones(radius, halfZonation);
         inhabited = true;
-        populator.populateInitial(zones, 10, 10, 10);
+        populator.populateInitial(zones, 0, 0, 10);
         effectiveArea = Math.PI*radius*radius;
         zoneArea = 2*Math.PI*radius*(radius/halfZonation);
         daisyArea = zoneArea/daiziesPerZone;
@@ -86,7 +86,7 @@ public class Planet {
         updateLocalTempers();
         populator.rePopulate(this);
         iterationId++;
-        System.out.println("iteration: "+iterationId);
+
 
     }
 

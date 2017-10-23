@@ -2,12 +2,10 @@ package ru.kopylov.daisyplanet.appearense;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -19,12 +17,7 @@ import java.util.ArrayList;
  */
 public class Charts implements EventHandler {
 
-    private final Stage primaryStage;
-
-
     private final VBox vBox = new VBox();
-    private final TitledPane titledPane = new TitledPane();
-    private final Button button = new Button();
     private final Popup popup = new Popup();
 
     private boolean enabled = false;
@@ -44,6 +37,9 @@ public class Charts implements EventHandler {
     ArrayList<XYChart.Data<Long, Double>> tempersList = new ArrayList<>();
     ArrayList<XYChart.Data<Long, Double>> starConstsList = new ArrayList<>();
 
+    XYChart.Series<Long, Double> temperSeries = new XYChart.Series<>();
+    XYChart.Series<Long, Double> starConstSeries = new XYChart.Series<>();
+
     public void addTemper(Long iteration, Double temper){
         XYChart.Data<Long, Double> data = new XYChart.Data<>(iteration, temper);
         tempersList.add(data);
@@ -55,16 +51,15 @@ public class Charts implements EventHandler {
 
     }
     public void update(){
-        temperChart.getData().addAll(tempersList);
+        temperSeries.getData().addAll(tempersList);
         tempersList.clear();
-        starConstChart.getData().addAll(starConstsList);
+        starConstSeries.getData().addAll(starConstsList);
         starConstsList.clear();
     }
 
 
 
-    public Charts(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+    public Charts() {
         xAxisTemper.setAutoRanging(true);
         yAxisTemper.setAutoRanging(true);
         yAxisTemper.setLabel("Temperature");
@@ -72,38 +67,35 @@ public class Charts implements EventHandler {
         yAxisStarConst.setAutoRanging(true);
         yAxisStarConst.setLabel("Star energy");
 
+
+
         temperChart = new LineChart(xAxisTemper, yAxisTemper);
         temperChart.setAnimated(true);
+        temperChart.setTitle("Temperature");
+        temperChart.setLegendVisible(false);
+        temperChart.setCreateSymbols(false);
+        temperChart.getData().add(temperSeries);
+        temperChart.setPrefSize(400,280);
+
         starConstChart = new LineChart(xAxisStarConst, yAxisStarConst);
         starConstChart.setAnimated(true);
+        starConstChart.setTitle("Star energy");
+        starConstChart.setLegendVisible(false);
+        starConstChart.setCreateSymbols(false);
+        starConstChart.getData().add(starConstSeries);
+        starConstChart.setPrefSize(400, 280);
 
-        button.setText("show/hide");
-        button.setOnAction(this);
-
-        titledPane.setGraphic(new Label("Charts"));
-        titledPane.setContent(button);
-
-        vBox.getChildren().addAll(temperChart, starConstChart);
-        popup.getContent().add(vBox);
-
-
+         vBox.getChildren().addAll(temperChart, starConstChart);
 
 
     }
 
     @Override
     public void handle(Event event) {
-        enabled =!enabled;
-        if(enabled) {
-            update();
-            popup.show(primaryStage);
-        } else {
-            popup.hide();
-        }
-
+                 update();
     }
 
-    public TitledPane getPane(){
-        return titledPane;
+    public Node getPane(){
+        return vBox;
     }
 }

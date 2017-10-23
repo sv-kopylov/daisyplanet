@@ -4,6 +4,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.converter.NumberStringConverter;
@@ -20,6 +21,7 @@ public class Updater implements EventHandler {
     private final InfoLayer il;
     private final GraphicsContext gc;
     private  final Charts charts;
+    private  final BorderPane parentPane;
 
     private final TitledPane titledPane = new TitledPane();
     private final VBox vBox = new VBox();
@@ -36,13 +38,20 @@ public class Updater implements EventHandler {
 
 
 
-    public Updater(Planet planet, PlanetLayer pl, TemperatureLayer tl, InfoLayer il, GraphicsContext gc, Charts charts) {
+    public Updater(Planet planet,
+                   PlanetLayer pl,
+                   TemperatureLayer tl,
+                   InfoLayer il,
+                   GraphicsContext gc,
+                   Charts charts,
+                   BorderPane parentPane) {
         this.planet = planet;
         this.pl = pl;
         this.tl = tl;
         this.gc = gc;
         this.il = il;
         this.charts = charts;
+        this.parentPane = parentPane;
         button.setText("Update");
         button.setLayoutX(1);
         button.setLayoutY(1);
@@ -82,7 +91,7 @@ public class Updater implements EventHandler {
 
     }
     private void update(){
-        titledPane.setDisable(true);
+        parentPane.setDisable(true);
         updateNumbers();
         for (int i=0; i<times;i++){
             planet.update();
@@ -102,7 +111,9 @@ public class Updater implements EventHandler {
 
         il.setInfo(planet);
         il.ekspose(gc);
-        titledPane.setDisable(false);
+
+        charts.update();
+        parentPane.setDisable(false);
     }
 
     private void updateNumbers(){
