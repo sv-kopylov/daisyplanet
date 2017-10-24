@@ -8,14 +8,12 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
 /**
  * Created by sergey on 18.10.17.
  */
-public class Charts implements EventHandler {
+public class Charts  {
 
     private final VBox vBox = new VBox();
     private final Popup popup = new Popup();
@@ -55,14 +53,18 @@ public class Charts implements EventHandler {
         tempersList.clear();
         starConstSeries.getData().addAll(starConstsList);
         starConstsList.clear();
+
     }
 
 
 
     public Charts() {
         xAxisTemper.setAutoRanging(true);
-        yAxisTemper.setAutoRanging(true);
+        yAxisTemper.setAutoRanging(false
+        );
         yAxisTemper.setLabel("Temperature");
+        yAxisTemper.setLowerBound(200);
+        yAxisTemper.setUpperBound(300);
         xAxisStarConst.setAutoRanging(true);
         yAxisStarConst.setAutoRanging(true);
         yAxisStarConst.setLabel("Star energy");
@@ -90,10 +92,7 @@ public class Charts implements EventHandler {
 
     }
 
-    @Override
-    public void handle(Event event) {
-                 update();
-    }
+
 
     public Node getPane(){
         return vBox;

@@ -27,9 +27,13 @@ public class Updater implements EventHandler {
     private final VBox vBox = new VBox();
 
     private final Button button = new Button();
+
+
     private final TextField timesField = new TextField();
     private final TextField incrementOnField = new TextField();
     private final TextField everyField = new TextField();
+
+
 
     private int times=0;
     private int every =0;
@@ -56,6 +60,7 @@ public class Updater implements EventHandler {
         button.setLayoutX(1);
         button.setLayoutY(1);
         button.setOnAction(this);
+
         timesField.setPrefColumnCount(5);
         incrementOnField.setPrefColumnCount(4);
         everyField.setPrefColumnCount(4);
@@ -78,6 +83,7 @@ public class Updater implements EventHandler {
         hBoxIncr.getChildren().add(everyField);
         vBox.getChildren().add(hBoxIncr);
         vBox.getChildren().add(new Label("iteration(s)"));
+
         titledPane.setContent(vBox);
 
 
@@ -99,6 +105,9 @@ public class Updater implements EventHandler {
             if(every!=0){
                 if(i%every==0){
                     Conditions.getInstance().StarConstant+=incrementOn;
+                    if(Conditions.getInstance().StarConstant<0){
+                        Conditions.getInstance().StarConstant = 0;
+                    }
                 }
             }
         }
