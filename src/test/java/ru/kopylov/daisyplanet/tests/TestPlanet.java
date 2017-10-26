@@ -40,6 +40,8 @@ public class TestPlanet {
     @Test
     public void testLocalTemperatures(){
              Planet Mars = new Planet();
+             Mars.populate(1,1,1);
+             Mars.update();
         Zone [] zones = Mars.getZones();
         Arrays.stream(zones)
                 .map(zone->zone.getLocalTemperature())
