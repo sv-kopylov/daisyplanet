@@ -32,7 +32,7 @@ public class Zone {
     }
     //    metrics
 
-    /** температура на поверхности в данной area*/
+    /** температура на поверхности в данной zone*/
     private double localTemperature;
 
 //    количество маргариток

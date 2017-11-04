@@ -52,7 +52,7 @@ public class Planet {
 
     /** условная площадь одной маргаритки, справочный параметр*/
     private double daisyArea;
-
+//
     PopulatorImpl populator = new PopulatorImpl();
     AlbedoCalculator albedoCalculator = new AlbedoCalculatorImpl();
 
@@ -92,8 +92,6 @@ public class Planet {
         updateLocalTempers();
         populator.rePopulate(this);
         iterationId++;
-
-
     }
 
     private void updateLocalTempers(){

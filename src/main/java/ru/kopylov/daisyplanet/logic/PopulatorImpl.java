@@ -90,6 +90,9 @@ public class PopulatorImpl implements Populator {
             white=0;
         }
 
+        if (white==0&&black==0&&none==0){
+            none=1;
+        }
         populate  (zone, white, black, none);
 
     }

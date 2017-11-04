@@ -7,11 +7,7 @@ import ru.kopylov.daisyplanet.model.Zone;
  * Created by sergey on 22.08.17.
  */
 public interface Populator {
-       void populateInitial(Zone[] zones, int whiteExpectance, int black, int none);
+       void populateInitial(Zone[] zones, int whiteExpectance, int blackExpectance, int noneExpectance);
        void populate(Zone zone,  int white, int black, int none);
-       public void rePopulate(Planet planet);
-
-
-
-
+       void rePopulate(Planet planet);
 }
