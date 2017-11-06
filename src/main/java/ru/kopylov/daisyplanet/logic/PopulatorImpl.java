@@ -17,7 +17,8 @@ import org.apache.logging.log4j.Logger;
  */
 public class PopulatorImpl implements Populator {
     private static Logger logger = LogManager.getLogger(PopulatorImpl.class);
-
+    private Random random = new Random();
+    
     public  void populateInitial(Zone[] zones, int whiteExpectance, int blackExpectance, int noneExpectance){
         for (int i=0; i<zones.length; i++){
            populate(zones[i], whiteExpectance, blackExpectance, noneExpectance);
@@ -25,7 +26,6 @@ public class PopulatorImpl implements Populator {
             }
         }
     public void populate(Zone zone, int white, int black, int none){
-        Random random = new Random(GregorianCalendar.getInstance().getTimeInMillis());
         double sum = white+black+none;
         double whiteBorder = (double)white/sum;
         double blackBorder = 1.0 - (double)black/sum;
@@ -56,7 +56,7 @@ public class PopulatorImpl implements Populator {
             down = i;
             if(i<=zones.length-3){up = i + 2;}
             cnt+=zones[i].isAlive()?1:0;
-            logger.trace("zone["+i+"]: "+ zones[i].toString());
+            logger.trace("zone[{}]: {}", i, zones[i]);
 
         }
         logger.trace("Alive counter: "+cnt);
