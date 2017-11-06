@@ -1,6 +1,5 @@
 package ru.kopylov.daisyplanet.logic;
 
-import org.apache.log4j.Logger;
 import ru.kopylov.daisyplanet.model.Planet;
 import ru.kopylov.daisyplanet.model.Zone;
 import ru.kopylov.daisyplanet.model.daizies.BlackDaisy;
@@ -9,13 +8,15 @@ import ru.kopylov.daisyplanet.model.Conditions;
 
 import java.util.GregorianCalendar;
 import java.util.Random;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 /**
  * Created by sergey on 22.08.17.
  */
 public class PopulatorImpl implements Populator {
-    private static Logger logger = Logger.getLogger(PopulatorImpl.class);
+    private static Logger logger = LogManager.getLogger(PopulatorImpl.class);
 
     public  void populateInitial(Zone[] zones, int whiteExpectance, int blackExpectance, int noneExpectance){
         for (int i=0; i<zones.length; i++){

@@ -1,17 +1,18 @@
 package ru.kopylov.daisyplanet.dao;
 
-import org.apache.log4j.Logger;
 import ru.kopylov.daisyplanet.model.Conditions;
 import ru.kopylov.daisyplanet.model.Planet;
 import ru.kopylov.daisyplanet.model.Zone;
 
 import java.sql.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Created by sergey on 20.09.17.
  */
 public class PlanetDAO {
-    Logger logger = Logger.getLogger(PlanetDAO.class);
+    Logger logger = LogManager.getLogger(PlanetDAO.class);
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost";

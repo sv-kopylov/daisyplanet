@@ -1,6 +1,7 @@
 package ru.kopylov.daisyplanet.tests;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.*;
 import org.junit.Test;
 import ru.kopylov.daisyplanet.logic.ZoneMaker;
@@ -14,7 +15,7 @@ import static org.junit.Assert.assertTrue;
  */
 
 public class TestZoneMaker {
-    private static Logger logger =  Logger.getLogger(TestZoneMaker.class);
+    private static Logger logger =  LogManager.getLogger(TestZoneMaker.class);
 
     Zone[] zones;
     int halfFragmentation = 10;
