@@ -1,6 +1,9 @@
 package ru.kopylov.daisyplanet.logic;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
 import ru.kopylov.daisyplanet.model.Planet;
 import ru.kopylov.daisyplanet.model.Zone;
 import ru.kopylov.daisyplanet.model.daizies.BlackDaisy;
@@ -14,7 +17,12 @@ import java.util.Random;
 /**
  * Created by sergey on 22.08.17.
  */
+@Component
+@DependsOn("conditions")
 public class PopulatorImpl implements Populator {
+
+    @Autowired
+    Conditions conditions;
     private static Logger logger = Logger.getLogger(PopulatorImpl.class);
 
     public  void populateInitial(Zone[] zones, int whiteExpectance, int blackExpectance, int noneExpectance){
@@ -30,7 +38,7 @@ public class PopulatorImpl implements Populator {
         double blackBorder = 1.0 - (double)black/sum;
         zone.clear();
 
-        for (long j=0; j< Conditions.getInstance().daiziesPerZone; j++){
+        for (long j=0; j< conditions.daiziesPerZone; j++){
             double num = random.nextDouble();
             if (num<whiteBorder){
                 zone.incrementWhite();

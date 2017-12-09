@@ -6,7 +6,8 @@ import org.springframework.stereotype.Component;
 /**
  * Created by sergey on 10.08.17.
  */
-@Component
+@Component("starr")
+@DependsOn("conditions")
 public class Starr {
 
     /**Звездная постоянная - суммарная мощность излучения звезды, проходящего через единичную площадку,

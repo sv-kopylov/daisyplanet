@@ -2,6 +2,9 @@ package ru.kopylov.daisyplanet.tests;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.kopylov.daisyplanet.logic.Populator;
 import ru.kopylov.daisyplanet.logic.PopulatorImpl;
 import ru.kopylov.daisyplanet.logic.ZoneMaker;
 import ru.kopylov.daisyplanet.model.Zone;
@@ -16,11 +19,13 @@ public class TestInitialPopulation {
     int halfFragmentation = 10;
     double radius = 1000;
     long daiziesPerZone = 100;
-    PopulatorImpl idp = new PopulatorImpl();
+    Populator idp = new PopulatorImpl();
 
     @Before
     public void init(){
         zones = ZoneMaker.makeZones(radius, halfFragmentation);
+        ApplicationContext ctx = new AnnotationConfigApplicationContext("ru.kopylov.daisyplanet");
+        idp = ctx.getBean(Populator.class);
 
     }
 

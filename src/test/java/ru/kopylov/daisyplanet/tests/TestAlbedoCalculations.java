@@ -1,10 +1,9 @@
 package ru.kopylov.daisyplanet.tests;
 
 import org.junit.*;
-import ru.kopylov.daisyplanet.logic.AlbedoCalculator;
-import ru.kopylov.daisyplanet.logic.AlbedoCalculatorImpl;
-import ru.kopylov.daisyplanet.logic.PopulatorImpl;
-import ru.kopylov.daisyplanet.logic.ZoneMaker;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.kopylov.daisyplanet.logic.*;
 import ru.kopylov.daisyplanet.model.Zone;
 import ru.kopylov.daisyplanet.model.daizies.BlackDaisy;
 import ru.kopylov.daisyplanet.model.daizies.Daisy;
@@ -20,14 +19,15 @@ public class TestAlbedoCalculations {
     int halfFragmentation = 10;
     double radius = 1000;
     long daiziesPerZone = 100;
-    PopulatorImpl idp = new PopulatorImpl();
+    Populator idp;
     AlbedoCalculator calc = new AlbedoCalculatorImpl();
     Daisy daisy;
 
     @Before
     public void init(){
         zones = ZoneMaker.makeZones(radius, halfFragmentation);
-
+        ApplicationContext ctx = new AnnotationConfigApplicationContext("ru.kopylov.daisyplanet");
+        idp = ctx.getBean(Populator.class);
     }
 
     @Test

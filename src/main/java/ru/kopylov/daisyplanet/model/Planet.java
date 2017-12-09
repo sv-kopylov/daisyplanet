@@ -19,6 +19,8 @@ public class Planet {
 
     @Autowired
     private Starr star;
+    @Autowired
+    Conditions conditions;
     private Zone[] zones;
     private boolean inhabited;
 
@@ -32,16 +34,16 @@ public class Planet {
     private double temperature = 0;
 
     /** Планета имеет свой размер*/
-    private double radius = Conditions.getInstance().radius;
+    private double radius;
 
     /** количество поясов на которое разбито одно полушарие*/
-    private int halfZonation = Conditions.getInstance().halfZonation;
+    private int halfZonation;
 
     /** фрагментация пояса: максимальное количество маргариток на пояс,
      * на всех поясах - количество маргариток одинаковое, это не ограничение программы,
      * а геометрический закон, ибо пояса с одинаковой высотой имеют одинаковую площадь,
      * так - то*/
-    private long daiziesPerZone = Conditions.getInstance().daiziesPerZone;
+    private long daiziesPerZone;
 
 
     /** эффективная площадь - проекция планеты на плоскость перпендикулярную напправлению излучения идущему
@@ -60,10 +62,18 @@ public class Planet {
     /** условная площадь одной маргаритки, справочный параметр*/
     private double daisyArea;
 //
-    PopulatorImpl populator = new PopulatorImpl();
+    @Autowired
+    PopulatorImpl populator;
     AlbedoCalculator albedoCalculator = new AlbedoCalculatorImpl();
 
     public Planet(){
+    }
+    @PostConstruct
+    public void init(){
+        radius = conditions.radius;
+        halfZonation = conditions.halfZonation;
+        daiziesPerZone = conditions.daiziesPerZone;
+
         zones = ZoneMaker.makeZones(radius, halfZonation);
         inhabited = true;
         populator.populateInitial(zones, 0, 0, 10);
@@ -72,11 +82,6 @@ public class Planet {
         daisyArea = zoneArea/daiziesPerZone;
         iterationId =0l;
         albedo = albedoCalculator.calcAlbedo(zones);
-
-
-    }
-    @PostConstruct
-    public void init(){
         temperature = StephanBoltsman.countTemperature(albedo,star.getStarConstant());
     }
     public Planet(Zone[] zones, boolean inhabited, double albedo, double temperature, double radius,

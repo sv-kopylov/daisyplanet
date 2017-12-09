@@ -1,6 +1,11 @@
 package ru.kopylov.daisyplanet.tests;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.kopylov.daisyplanet.logic.Populator;
+import ru.kopylov.daisyplanet.logic.ZoneMaker;
 import ru.kopylov.daisyplanet.model.Planet;
 import ru.kopylov.daisyplanet.model.Zone;
 import ru.kopylov.daisyplanet.model.Conditions;
@@ -13,10 +18,16 @@ import static org.junit.Assert.assertTrue;
  * Created by sergey on 28.08.17.
  */
 public class TestPlanet {
+    Planet Mars;
+    @Before
+    public void init(){
+
+        ApplicationContext ctx = new AnnotationConfigApplicationContext("ru.kopylov.daisyplanet");
+        Mars = ctx.getBean(Planet.class);
+    }
 
     @Test
     public void testTemperature(){
-        Planet Mars = new Planet();
         assertTrue("Planet temperature haz not been set",(Mars.getTemperature()>0));
         System.out.println(Mars.getAlbedo());
         System.out.println(Mars.getTemperature() + Conditions.getInstance().Kelvin + Conditions.getInstance().planetDeltaTemper);
@@ -25,7 +36,6 @@ public class TestPlanet {
     @Test
     public void testUpdate(){
 
-        Planet Mars = new Planet();
         System.out.print("a: "+String.format("%2.2f",Mars.getAlbedo()));
         System.out.println(" t: "+String.format("%2.2f",(Mars.getTemperature() + Conditions.getInstance().Kelvin + Conditions.getInstance().planetDeltaTemper)));
         System.out.println("_____________");
@@ -36,11 +46,10 @@ public class TestPlanet {
         }
     }
 
-//    TODO make test of local temperatures
+
     @Test
     public void testLocalTemperatures(){
-             Planet Mars = new Planet();
-             Mars.populate(1,1,1);
+              Mars.populate(1,1,1);
              Mars.update();
         Zone [] zones = Mars.getZones();
         Arrays.stream(zones)

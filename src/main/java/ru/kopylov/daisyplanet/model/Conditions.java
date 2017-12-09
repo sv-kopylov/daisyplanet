@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 /**
  * Created by sergey on 11.08.17.
  */
-@Component
+@Component("conditions")
 public class Conditions {
 
 
