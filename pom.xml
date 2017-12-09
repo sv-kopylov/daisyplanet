@@ -62,7 +62,16 @@
         <artifactId>mysql-connector-java</artifactId>
         <version>5.1.34</version>
     </dependency>
-
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>5.0.2.RELEASE</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>5.0.2.RELEASE</version>
+    </dependency>
 
 </dependencies>
 

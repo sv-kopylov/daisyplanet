@@ -1,16 +1,23 @@
 package ru.kopylov.daisyplanet.model;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
 import ru.kopylov.daisyplanet.logic.*;
 
+import javax.annotation.PostConstruct;
 import java.util.Arrays;
 
 
 /**
  * Created by sergey on 10.08.17.
  */
-
+@Component(value="planet")
+@DependsOn({"starr", "conditions"})
 public class Planet {
 
     private Long iterationId;
+
+    @Autowired
     private Starr star;
     private Zone[] zones;
     private boolean inhabited;
@@ -57,7 +64,6 @@ public class Planet {
     AlbedoCalculator albedoCalculator = new AlbedoCalculatorImpl();
 
     public Planet(){
-        this.star = new Starr();
         zones = ZoneMaker.makeZones(radius, halfZonation);
         inhabited = true;
         populator.populateInitial(zones, 0, 0, 10);
@@ -66,8 +72,12 @@ public class Planet {
         daisyArea = zoneArea/daiziesPerZone;
         iterationId =0l;
         albedo = albedoCalculator.calcAlbedo(zones);
-        temperature = StephanBoltsman.countTemperature(albedo,star.getStarConstant());
 
+
+    }
+    @PostConstruct
+    public void init(){
+        temperature = StephanBoltsman.countTemperature(albedo,star.getStarConstant());
     }
     public Planet(Zone[] zones, boolean inhabited, double albedo, double temperature, double radius,
                   double effectiveArea, double zoneArea, double daisyArea ){
