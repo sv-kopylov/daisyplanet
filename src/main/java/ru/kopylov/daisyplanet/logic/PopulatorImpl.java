@@ -23,6 +23,7 @@ public class PopulatorImpl implements Populator {
 
     @Autowired
     Conditions conditions;
+    Random random = new Random(GregorianCalendar.getInstance().getTimeInMillis());
     private static Logger logger = Logger.getLogger(PopulatorImpl.class);
 
     public  void populateInitial(Zone[] zones, int whiteExpectance, int blackExpectance, int noneExpectance){
@@ -32,7 +33,7 @@ public class PopulatorImpl implements Populator {
             }
         }
     public void populate(Zone zone, int white, int black, int none){
-        Random random = new Random(GregorianCalendar.getInstance().getTimeInMillis());
+
         double sum = white+black+none;
         double whiteBorder = (double)white/sum;
         double blackBorder = 1.0 - (double)black/sum;
@@ -101,7 +102,7 @@ public class PopulatorImpl implements Populator {
         if (white==0&&black==0&&none==0){
             none=1;
         }
-        populate  (zone, white, black, none);
+        populate(zone, white, black, none);
 
     }
 
