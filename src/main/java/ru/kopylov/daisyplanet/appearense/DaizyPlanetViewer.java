@@ -13,13 +13,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.kopylov.daisyplanet.model.Planet;
 
 /**
  * Created by sergey on 04.10.17.
  */
 public class DaizyPlanetViewer extends Application{
-    final Planet planet = new Planet();
+    Planet planet;
     public static void main(String...args){
         launch(DaizyPlanetViewer.class, args);
     }
@@ -29,7 +30,8 @@ public class DaizyPlanetViewer extends Application{
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext("ru.kopylov.daisyplanet");
+        planet = ctx.getBean(Planet.class);
 //        controllers
         PlanetLayer pl = new PlanetLayer(planet);
         TemperatureLayer tl = new TemperatureLayer(planet);
