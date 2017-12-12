@@ -22,6 +22,8 @@ public class Conditions {
       */
     public double planetDeltaTemper = 70.0;
 
+    public double MAXRATE = 2;
+
 
 //    public static long
 

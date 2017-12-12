@@ -16,6 +16,8 @@ import java.util.Random;
  */
 public class PopulatorImpl implements Populator {
     Random random = new Random(GregorianCalendar.getInstance().getTimeInMillis());
+    BlackDaisy blackDaisy = new BlackDaisy();
+    WhiteDaizy whiteDaizy = new WhiteDaizy();
     private static Logger logger = Logger.getLogger(PopulatorImpl.class);
 
     public  void populateInitial(Zone[] zones, int whiteExpectance, int blackExpectance, int noneExpectance){
@@ -76,20 +78,11 @@ public class PopulatorImpl implements Populator {
         if(black==0&&BlackDaisy.isFitForLife(temper)){
             black = (int) (down.getNumBlackDaisies() + up.getNumBlackDaisies())/2;
         }
-        if(BlackDaisy.isComfortable(temper)){
-            black*=2;
-        } else if(!BlackDaisy.isFitForLife(temper)){
-            black=0;
-        }
-
         if(white==0&&WhiteDaizy.isFitForLife(temper)){
             white = (int) (down.getNumWhiteDaisies() + up.getNumWhiteDaisies())/2;
         }
-        if(WhiteDaizy.isComfortable(temper)){
-            white*=2;
-        } else if(!WhiteDaizy.isFitForLife(temper)){
-            white=0;
-        }
+        black = (int) (black*blackDaisy.getRate(temper));
+        white = (int) (white*whiteDaizy.getRate(temper));
 
         if (white==0&&black==0&&none==0){
             none=1;
