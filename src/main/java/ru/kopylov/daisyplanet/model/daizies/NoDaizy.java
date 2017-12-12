@@ -16,6 +16,11 @@ public class NoDaizy extends Daisy {
         return albedo;
     }
 
+    @Override
+    public double getBestTemper() {
+        return -1.0;
+    }
+
     public boolean isComfortable(double temperature) {
         return false;
     }
