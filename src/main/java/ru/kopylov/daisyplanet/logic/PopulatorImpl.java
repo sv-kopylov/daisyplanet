@@ -9,6 +9,7 @@ import ru.kopylov.daisyplanet.model.Conditions;
 
 import java.util.GregorianCalendar;
 import java.util.Random;
+import java.util.stream.Stream;
 
 
 /**
@@ -21,11 +22,9 @@ public class PopulatorImpl implements Populator {
     private static Logger logger = Logger.getLogger(PopulatorImpl.class);
 
     public  void populateInitial(Zone[] zones, int whiteExpectance, int blackExpectance, int noneExpectance){
-        for (int i=0; i<zones.length; i++){
-           populate(zones[i], whiteExpectance, blackExpectance, noneExpectance);
-            logger.trace("black: "+zones[i].getNumBlackDaisies()+" white: "+zones[i].getNumWhiteDaisies()+" empty: "+zones[i].getNumEmptyCells());
-            }
-        }
+        Stream.of(zones).forEach(z->populate(z,whiteExpectance, blackExpectance, noneExpectance));
+         }
+
     public void populate(Zone zone, int white, int black, int none){
 
         double sum = white+black+none;
@@ -42,9 +41,9 @@ public class PopulatorImpl implements Populator {
             } else {
                 zone.incrementEmpty();
             }
+
         }
-
-
+        logger.trace("black: "+zone.getNumBlackDaisies()+" white: "+zone.getNumWhiteDaisies()+" empty: "+zone.getNumEmptyCells());
 
     }
     public void rePopulate(Planet planet){
